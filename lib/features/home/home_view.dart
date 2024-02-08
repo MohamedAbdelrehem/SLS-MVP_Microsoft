@@ -13,10 +13,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final List<Widget> _pages = const [
-    HomeViewBody(),
     SettingsViewBody(),
+    HomeViewBody(),
     ChatViewBody(),
   ];
 
@@ -34,13 +34,13 @@ class _HomeViewState extends State<HomeView> {
     return CurvedNavigationBar(
       index: _selectedIndex, // Set initial selected index
       backgroundColor: kBGColor,
-      color: const Color.fromARGB(255, 90, 255, 255),
+      color: kPrimaryColor,
       animationDuration: const Duration(milliseconds: 300),
       onTap: (index) => setState(() => _selectedIndex = index),
       items: const [
-        Icon(Icons.chat),
-        Icon(Icons.home, color: Colors.white),
         Icon(Icons.settings),
+        Icon(Icons.home, color: Colors.white),
+        Icon(Icons.chat),
       ],
     );
   }
