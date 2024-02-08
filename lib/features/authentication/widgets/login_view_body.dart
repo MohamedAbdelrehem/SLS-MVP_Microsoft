@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/assets.dart';
@@ -119,7 +120,9 @@ class LoginViewBody extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: InkWell(
                   //GestureDetector to InkWell for animation
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).go('/home');
+                  },
 
                   child: Ink(
                     //Container to Ink for animation
@@ -147,17 +150,9 @@ class LoginViewBody extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return RegisterPage();
-                      //     },
-                      //   ),
-                      // );
+                      GoRouter.of(context).go('/register');
                     },
                     child: GestureDetector(
-                      /*onTap: ,*/
                       child: Text(' Register Now',
                           style: TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.bold)),
