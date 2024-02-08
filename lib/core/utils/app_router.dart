@@ -8,7 +8,6 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(
-        //hiiiiiiiiii
         path: '/',
         builder: (context, state) => const LoginView(),
       ),
