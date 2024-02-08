@@ -16,7 +16,7 @@ class SLS extends StatelessWidget {
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: kPrimaryColor,
+        scaffoldBackgroundColor: kBGColor,
         // textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
       ),
     );
