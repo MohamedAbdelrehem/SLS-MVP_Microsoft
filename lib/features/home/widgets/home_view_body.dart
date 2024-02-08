@@ -37,8 +37,103 @@ class HomeViewBody extends StatelessWidget {
             child: CustomContainer(
               width: 500,
               height: 380,
-              child: Container(),
+              child: tableV(),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class tableV extends StatelessWidget {
+  const tableV({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: const <DataColumn>[
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Name',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Role',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Text(
+                'Age',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+        ],
+        rows: const <DataRow>[
+          DataRow(
+            cells: <DataCell>[
+              DataCell(Text('Sarah')),
+              DataCell(Text('19')),
+              DataCell(Text('Student')),
+              DataCell(Text('Student')),
+              DataCell(Text('Student')),
+              DataCell(Text('Student')),
+              DataCell(Text('Student')),
+              DataCell(Text('Student')),
+            ],
           ),
         ],
       ),
