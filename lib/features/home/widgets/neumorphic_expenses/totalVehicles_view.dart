@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/neumorphic_expenses/categories_row.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/neumorphic_expenses/pie_chart_view.dart';
 
-class MontlyExpensesView extends StatelessWidget {
-  const MontlyExpensesView({super.key});
+class TotalVehiclesPieChart extends StatelessWidget {
+  const TotalVehiclesPieChart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,6 @@ class MontlyExpensesView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            const Spacer(),
             SizedBox(
               height: height * 0.43,
               child: Padding(
@@ -24,7 +23,7 @@ class MontlyExpensesView extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: height * 0.065),
                     Text(
-                      'Monthly Expenses',
+                      'Total Vehicles',
                       style: GoogleFonts.rubik(
                           fontWeight: FontWeight.w400, fontSize: 18),
                     ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
-import 'package:sls_mvp_microsoft/features/home/widgets/neumorphic_expenses/monthly_expenses_view.dart';
+import 'package:sls_mvp_microsoft/features/home/widgets/Map/mapLeaflet_view.dart';
+// import 'package:sls_mvp_microsoft/features/home/widgets/Map/mapbox_view.dart';
+import 'package:sls_mvp_microsoft/features/home/widgets/neumorphic_expenses/totalVehicles_view.dart';
 import 'package:sls_mvp_microsoft/features/monitoring/monitoring_view.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -16,8 +18,8 @@ class HomeViewBody extends StatelessWidget {
             padding: EdgeInsets.all(30),
             child: CustomContainer(
               width: 500,
-              height: 380,
-              child: MontlyExpensesView(),
+              height: 450,
+              child: TotalVehiclesPieChart(),
             ),
           ),
           const SizedBox(
@@ -28,7 +30,7 @@ class HomeViewBody extends StatelessWidget {
             child: CustomContainer(
               width: 500,
               height: 380,
-              child: Container(),
+              child: MapLeafletView(),
             ),
           ),
           const SizedBox(
