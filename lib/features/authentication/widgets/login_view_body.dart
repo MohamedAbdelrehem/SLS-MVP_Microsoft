@@ -122,7 +122,7 @@ class LoginViewBody extends StatelessWidget {
                   //GestureDetector to InkWell for animation
                   onTap: () {
                     if (_phoneNumberController.text == "01011929211" &&
-                        _passwordController.text == "MicrosoftMVP2023") {
+                        _passwordController.text == "123123123") {
                       GoRouter.of(context).go('/home');
                     } else {
                       //show error snack
