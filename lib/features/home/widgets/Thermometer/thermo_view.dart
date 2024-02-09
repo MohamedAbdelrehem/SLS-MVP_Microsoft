@@ -9,13 +9,10 @@ class ThermoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: CustomContainer(
-        width: 500,
-        height: 380,
-        child: ThermoViewBody(),
-      ),
+    return CustomContainer(
+      width: 500,
+      height: 380,
+      child: ThermoViewBody(),
     );
   }
 }
