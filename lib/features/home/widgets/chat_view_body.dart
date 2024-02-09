@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/AI/src/models/gemini/gemini.dart';
 
 const apiKey = "AIzaSyACD2MOPosuQdiUoCWGIjsUEo1UL81svBE";
@@ -17,8 +18,13 @@ class _ChatViewBodyState extends State<ChatViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mr.Fixer"),
+        title: const Text("Mr. Fixer",
+            style: TextStyle(
+                color: kPrimaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold)),
         centerTitle: true,
+        backgroundColor: kBGColor,
       ),
       body: const TextOnly(),
     );
@@ -63,7 +69,7 @@ class _TextOnlyState extends State<TextOnly> {
       setState(() {
         loading = false;
         textChat.add({
-          "role": "Gemini",
+          "role": "Mr. Fixer",
           "text": value.text,
         });
       });
@@ -72,7 +78,7 @@ class _TextOnlyState extends State<TextOnly> {
       setState(() {
         loading = false;
         textChat.add({
-          "role": "Gemini",
+          "role": "Mr. Fixer",
           "text": error.toString(),
         });
       });

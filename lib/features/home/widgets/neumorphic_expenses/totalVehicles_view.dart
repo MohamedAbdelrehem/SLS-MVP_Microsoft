@@ -9,38 +9,35 @@ class TotalVehiclesPieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(193, 214, 233, 1),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: height * 0.32,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20),
-                    Text(
-                      'Total Vehicles',
-                      style: GoogleFonts.rubik(
-                          fontWeight: FontWeight.w400, fontSize: 20),
+    return Container(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: height * 0.32,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 20),
+                  Text(
+                    'Total Vehicles',
+                    style: GoogleFonts.rubik(
+                        fontWeight: FontWeight.w400, fontSize: 20),
+                  ),
+                  const Expanded(
+                    child: Row(
+                      children: [
+                        CategoriesRow(),
+                        PieChartView(),
+                      ],
                     ),
-                    const Expanded(
-                      child: Row(
-                        children: [
-                          CategoriesRow(),
-                          PieChartView(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
