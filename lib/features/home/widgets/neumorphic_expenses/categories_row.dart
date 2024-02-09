@@ -37,7 +37,7 @@ class ExpenseCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 15),
       child: Row(
         children: <Widget>[
           Container(
@@ -49,8 +49,10 @@ class ExpenseCategory extends StatelessWidget {
                   kNeumorphicColors.elementAt(index % kNeumorphicColors.length),
             ),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 12),
           Text(text.capitalize()),
+          Text(' : ${kCategories.elementAt(index).amount.toString()}',
+              style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );

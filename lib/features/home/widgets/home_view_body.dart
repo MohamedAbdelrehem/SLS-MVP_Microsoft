@@ -15,10 +15,10 @@ class HomeViewBody extends StatelessWidget {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(20),
             child: CustomContainer(
               width: 500,
-              height: 450,
+              height: 350,
               child: TotalVehiclesPieChart(),
             ),
           ),

@@ -15,21 +15,21 @@ class TotalVehiclesPieChart extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: height * 0.43,
+              height: height * 0.32,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: height * 0.065),
+                    SizedBox(height: 20),
                     Text(
                       'Total Vehicles',
                       style: GoogleFonts.rubik(
-                          fontWeight: FontWeight.w400, fontSize: 18),
+                          fontWeight: FontWeight.w400, fontSize: 20),
                     ),
                     const Expanded(
                       child: Row(
-                        children: <Widget>[
+                        children: [
                           CategoriesRow(),
                           PieChartView(),
                         ],

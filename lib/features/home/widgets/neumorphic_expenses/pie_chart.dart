@@ -60,19 +60,17 @@ class Category {
 }
 
 final kCategories = [
-  Category('groceries', amount: 500.00),
-  Category('online Shopping', amount: 150.00),
-  Category('eating', amount: 90.00),
-  Category('bills', amount: 90.00),
-  Category('subscriptions', amount: 40.00),
-  Category('fees', amount: 20.00),
+  Category('On Route', amount: 10),
+  Category('Avilable', amount: 35),
+  Category('''Out of
+ service''', amount: 5),
 ];
 
 final kNeumorphicColors = [
+  const Color.fromRGBO(255, 171, 67, 1), // rgb(255, 171, 67)
+  const Color.fromRGBO(123, 201, 82, 1), // rgb(123, 201, 82)
+  const Color.fromRGBO(252, 91, 57, 1), //  rgb(252, 91, 57)
   const Color.fromRGBO(82, 98, 255, 1), //  rgb(82, 98, 255)
   const Color.fromRGBO(46, 198, 255, 1), // rgb(46, 198, 255)
-  const Color.fromRGBO(123, 201, 82, 1), // rgb(123, 201, 82)
-  const Color.fromRGBO(255, 171, 67, 1), // rgb(255, 171, 67)
-  const Color.fromRGBO(252, 91, 57, 1), //  rgb(252, 91, 57)
   const Color.fromRGBO(139, 135, 130, 1), //rgb(139, 135, 130)
 ];
