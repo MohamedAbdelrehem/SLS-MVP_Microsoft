@@ -285,3 +285,85 @@ class tableV extends StatelessWidget {
     );
   }
 }
+
+// DataRow createDataRow({
+//   required String trackingId,
+//   required String powerColor,
+//   required String temperature,
+//   required String doorColor,
+//   required String distance,
+//   required String batteryLevel,
+//   required String address,
+//   required String speed,
+//   required String statusText,
+//   // required String statusColor,
+//   required String imei,
+//   required String timeAgo,
+//   required String role,
+//   required String name,
+//   required String startTime,
+//   required String endTime,
+//   required String lastUpdated,
+//   required String voltage,
+//   // required Function onTap,
+// }) {
+//   int powercolori = int.parse(powerColor);
+//   int doorcolori = int.parse(doorColor);
+
+//   return DataRow(
+//     cells: [
+//       DataCell(
+//         Row(
+//           children: [
+//             Icon(Icons.local_shipping),
+//             SizedBox(width: 10),
+//             Text(trackingId),
+//           ],
+//         ),
+//         onTap: () {
+//           (BuildContext context) {
+//             context.goNamed('DetailsPage', pathParameters: {
+//               'name': trackingId,
+//               'ignite': powerColor,
+//               'temp': temperature
+//             });
+//           };
+//         },
+//       ),
+//       DataCell(
+//         Icon(Icons.power_settings_new, color: Color(powercolori)),
+//       ),
+//       DataCell(Text(temperature)),
+//       DataCell(Icon(Icons.door_front_door, color: Color(doorcolori))),
+//       DataCell(Text(distance)),
+//       DataCell(Text(batteryLevel, style: TextStyle(color: Colors.red))),
+//       DataCell(Text(address, style: TextStyle(color: Colors.blue))),
+//       DataCell(Text(speed)),
+//       DataCell(
+//         Container(
+//           padding: const EdgeInsets.all(3),
+//           decoration: BoxDecoration(
+//             color: Colors.black,
+//             borderRadius: BorderRadius.circular(10),
+//           ),
+//           child: Text(statusText, style: TextStyle(color: Colors.white)),
+//         ),
+//       ),
+//       DataCell(
+//         Container(
+//           padding: const EdgeInsets.all(10),
+//           decoration: BoxDecoration(color: Colors.grey),
+//           child: Text(imei, style: TextStyle(color: Colors.black)),
+//         ),
+//       ),
+//       DataCell(Text(timeAgo)),
+//       DataCell(Text(role)),
+//       DataCell(Text(name)),
+//       DataCell(Text(startTime)),
+//       DataCell(Text(endTime)),
+//       DataCell(Text(lastUpdated)),
+//       DataCell(Icon(Icons.videocam, color: Colors.red)),
+//       DataCell(Text(voltage)),
+//     ],
+//   );
+// }

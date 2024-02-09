@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/app_router.dart';
 
 void main() {
   // Gemini.init(apiKey: kGeminiApi, enableDebugging: true);
-
-  runApp(const SLS());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const SLS());
+  });
 }
 
 class SLS extends StatelessWidget {
@@ -19,6 +23,7 @@ class SLS extends StatelessWidget {
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: kBGColor,
         // textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
       ),

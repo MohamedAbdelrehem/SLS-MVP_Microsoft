@@ -17,7 +17,7 @@ class _ChatViewBodyState extends State<ChatViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Google Gemini"),
+        title: const Text("Mr.Fixer"),
         centerTitle: true,
       ),
       body: const TextOnly(),

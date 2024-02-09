@@ -5,7 +5,7 @@ import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-final _emailController = TextEditingController();
+final _fullNumberController = TextEditingController();
 final _passwordController = TextEditingController();
 
 class LoginViewBody extends StatelessWidget {
@@ -57,9 +57,9 @@ class LoginViewBody extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: _emailController,
+                      controller: _fullNumberController,
                       decoration: InputDecoration(
-                          border: InputBorder.none, hintText: 'Email'),
+                          border: InputBorder.none, hintText: 'Full Number'),
                     ),
                   ),
                 ),
@@ -122,6 +122,17 @@ class LoginViewBody extends StatelessWidget {
                   //GestureDetector to InkWell for animation
                   onTap: () {
                     GoRouter.of(context).go('/home');
+
+                    // if (_fullNumberController.toString() == '55' &&
+                    //     _passwordController.toString() == '12') {
+                    //   print('hello world');
+                    //   GoRouter.of(context).go('/home');
+                    // } else {
+                    //   print('$_fullNumberController');
+                    //   print('hello ');
+
+                    //   const SnackBar(content: Text('error'));
+                    // }
                   },
 
                   child: Ink(
