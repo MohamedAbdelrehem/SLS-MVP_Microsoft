@@ -19,7 +19,7 @@ class SlidingText extends StatelessWidget {
               'SLS',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 20, color: Color.fromARGB(255, 183, 183, 183)),
+                  fontSize: 120, color: Color.fromARGB(255, 255, 255, 255)),
             ),
           );
         });
