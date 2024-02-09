@@ -57,9 +57,9 @@ class tableV extends StatelessWidget {
   });
 
   final BuildContext context;
-  void _navigateToDetailsPage(String name, String age, String occupation) {
+  void _navigateToDetailsPage(String name, String ignite, String temp) {
     context.goNamed('DetailsPage',
-        pathParameters: {'name': name, 'age': age, 'occupation': occupation});
+        pathParameters: {'name': name, 'ignite': ignite, 'temp': temp});
   }
 
   @override
