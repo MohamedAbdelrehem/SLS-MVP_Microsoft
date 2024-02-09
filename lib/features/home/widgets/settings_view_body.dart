@@ -14,12 +14,16 @@ class SettingsViewBody extends StatelessWidget {
           width: 500,
           height: 500,
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'settings',
                   style: Styles.textStyle30,
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Row(
                   children: [
@@ -35,18 +39,26 @@ class SettingsViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   children: [
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.light_mode),
                     ),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.dark_mode),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 20),
+                const Text('lang   Arabic/English')
               ],
             ),
           ),
