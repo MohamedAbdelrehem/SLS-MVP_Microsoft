@@ -16,7 +16,7 @@ class CustomContainer extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: Color.fromARGB(250, 241, 241, 241),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),

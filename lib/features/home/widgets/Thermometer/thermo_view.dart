@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/Thermometer/widgets/thermo.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/Thermometer/widgets/thermo_view_body.dart';
 
@@ -8,12 +9,13 @@ class ThermoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFE0E0E0),
-        borderRadius: BorderRadius.circular(20),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+      child: CustomContainer(
+        width: 500,
+        height: 380,
+        child: ThermoViewBody(),
       ),
-      child: ThermoViewBody(),
     );
   }
 }

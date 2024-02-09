@@ -39,7 +39,7 @@ class ThermoViewBody extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: ConstrainedBox(
-                      constraints: BoxConstraints.loose(const Size(400, 800)),
+                      constraints: BoxConstraints.loose(const Size(600, 400)),
                       child: Stack(
                         children: [
                           Positioned.fill(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
+import 'package:sls_mvp_microsoft/features/home/widgets/Map/mapLeaflet_view.dart';
+import 'package:sls_mvp_microsoft/features/home/widgets/Thermometer/thermo_view.dart';
 
 class MonitorViewBody extends StatelessWidget {
   final String name;
@@ -15,18 +18,32 @@ class MonitorViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int col = int.parse(ignite);
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Name: $name'),
-          Icon(
-            Icons.power_settings_new,
-            color: Color(col),
+    return SafeArea(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Name: $name'),
+              Icon(
+                Icons.power_settings_new,
+                color: Color(col),
+              ),
+              Text('Occupation: $temp'),
+              // Add more details as needed
+
+              Padding(
+                padding: const EdgeInsets.all(30),
+                child: CustomContainer(
+                  width: 500,
+                  height: 380,
+                  child: MapLeafletView(),
+                ),
+              ),
+              ThermoView(),
+            ],
           ),
-          Text('Occupation: $temp'),
-          // Add more details as needed
-        ],
+        ),
       ),
     );
   }

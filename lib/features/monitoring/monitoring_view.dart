@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/monitoring_view_body.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -24,7 +25,11 @@ class DetailsPage extends StatelessWidget {
             GoRouter.of(context).go('/home');
           },
         ),
-        title: Text('Details'),
+        title: Text('Monitoring $name',
+            style: TextStyle(
+                fontSize: 20,
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold)),
       ),
       body: MonitorViewBody(
         name: name,
