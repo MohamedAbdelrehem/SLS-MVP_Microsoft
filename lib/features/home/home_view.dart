@@ -23,29 +23,32 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kBGColor,
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: Image(
-                height: 150,
-                image: AssetImage(AssetsData.logoMini),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 2,
               ),
-              floating: true,
-              pinned: false,
-              snap: true,
+            ],
+          ),
+          child: AppBar(
+            backgroundColor: kBGColor,
+            title: Image(
+              height: 150,
+              image: AssetImage(AssetsData.logoMini),
             ),
-            SliverSafeArea(
-              sliver: SliverToBoxAdapter(
-                child: _pages[
-                    _selectedIndex], // Display current page based on index
-              ),
-            ),
-          ],
+          ),
         ),
-        bottomNavigationBar: curvedBottomNav(),
+      ),
+      backgroundColor: kBGColor,
+      bottomNavigationBar: curvedBottomNav(),
+      body: SafeArea(
+        child: _pages[_selectedIndex], // Display current page based on index
       ),
     );
   }
