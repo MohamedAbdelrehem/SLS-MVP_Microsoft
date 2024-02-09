@@ -13,12 +13,12 @@ abstract class AppRouter {
         builder: (context, state) => const LoginView(),
       ),
       GoRoute(
-        path: '/DetailsPage/:name/:age/:occupation',
+        path: '/DetailsPage/:name/:ignite/:temp',
         name: 'DetailsPage',
         builder: (context, state) => DetailsPage(
           name: state.pathParameters['name']!,
-          age: state.pathParameters['age']!,
-          occupation: state.pathParameters['occupation']!,
+          ignite: state.pathParameters['ignite']!,
+          temp: state.pathParameters['temp']!,
         ),
       ),
       GoRoute(

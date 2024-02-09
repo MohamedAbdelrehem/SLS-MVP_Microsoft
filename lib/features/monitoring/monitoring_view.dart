@@ -4,11 +4,14 @@ import 'package:sls_mvp_microsoft/features/monitoring/widgets/monitoring_view_bo
 
 class DetailsPage extends StatelessWidget {
   final String name;
-  final String age;
-  final String occupation;
+  final String ignite;
+  final String temp;
 
   DetailsPage(
-      {required this.name, required this.age, required this.occupation});
+      {super.key,
+      required this.name,
+      required this.ignite,
+      required this.temp});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,8 @@ class DetailsPage extends StatelessWidget {
       ),
       body: MonitorViewBody(
         name: name,
-        age: age,
-        occupation: occupation,
+        ignite: ignite,
+        temp: temp,
       ),
     );
   }
