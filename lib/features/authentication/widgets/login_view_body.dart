@@ -5,7 +5,7 @@ import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-final _fullNumberController = TextEditingController();
+final _phoneNumberController = TextEditingController();
 final _passwordController = TextEditingController();
 
 class LoginViewBody extends StatelessWidget {
@@ -57,7 +57,7 @@ class LoginViewBody extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: _fullNumberController,
+                      controller: _phoneNumberController,
                       decoration: InputDecoration(
                           border: InputBorder.none, hintText: 'Full Number'),
                     ),
@@ -121,18 +121,18 @@ class LoginViewBody extends StatelessWidget {
                 child: InkWell(
                   //GestureDetector to InkWell for animation
                   onTap: () {
-                    GoRouter.of(context).go('/home');
-
-                    // if (_fullNumberController.toString() == '55' &&
-                    //     _passwordController.toString() == '12') {
-                    //   print('hello world');
-                    //   GoRouter.of(context).go('/home');
-                    // } else {
-                    //   print('$_fullNumberController');
-                    //   print('hello ');
-
-                    //   const SnackBar(content: Text('error'));
-                    // }
+                    if (_phoneNumberController.text == "01011929211" &&
+                        _passwordController.text == "MicrosoftMVP2023") {
+                      GoRouter.of(context).go('/home');
+                    } else {
+                      //show error snack
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Error: Invalid credentials'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   },
 
                   child: Ink(

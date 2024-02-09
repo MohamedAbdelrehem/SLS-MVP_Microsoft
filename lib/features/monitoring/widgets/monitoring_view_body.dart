@@ -26,7 +26,7 @@ class MonitorViewBody extends StatelessWidget {
       child: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+            padding: const EdgeInsets.only(left: 25, right: 25, top: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
