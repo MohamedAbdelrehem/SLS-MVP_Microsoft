@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/styles.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 
@@ -8,9 +9,9 @@ class SettingsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 130, bottom: 20),
       child: Expanded(
-        child: CustomContainer(
+        child: Container(
           width: 500,
           height: 500,
           child: Padding(
@@ -19,23 +20,25 @@ class SettingsViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'settings',
-                  style: Styles.textStyle30,
+                  'Settings',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: kPrimaryColor),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
-                      child: Text('Manager code', style: Styles.textStyle18),
+                    Text(
+                      'Manager code',
+                      style: Styles.textStyle18,
                     ),
-                    Expanded(
-                      child: TextField(
-                        controller: TextEditingController(text: '5D8SV896'),
-                        decoration:
-                            const InputDecoration(border: InputBorder.none),
-                      ),
+                    const SizedBox(width: 20),
+                    Text(
+                      '5D8SV896',
                     ),
                   ],
                 ),
@@ -43,6 +46,7 @@ class SettingsViewBody extends StatelessWidget {
                   height: 20,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
                       onPressed: () {},
@@ -58,7 +62,18 @@ class SettingsViewBody extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text('lang   Arabic/English')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Language', style: Styles.textStyle18),
+                    const SizedBox(width: 20),
+                    Text(
+                      'Arabic',
+                    ),
+                    Text(' / '),
+                    Text('English')
+                  ],
+                ),
               ],
             ),
           ),
