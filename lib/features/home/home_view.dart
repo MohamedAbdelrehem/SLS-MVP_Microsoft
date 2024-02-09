@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
+import 'package:sls_mvp_microsoft/core/utils/assets.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/chat_view_body.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/home_view_body.dart';
 import 'package:sls_mvp_microsoft/features/home/widgets/settings_view_body.dart';
@@ -22,10 +23,29 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: curvedBottomNav(),
-      body: SafeArea(
-        child: _pages[_selectedIndex], // Display current page based on index
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBGColor,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Image(
+                height: 150,
+                image: AssetImage(AssetsData.logoMini),
+              ),
+              floating: true,
+              pinned: false,
+              snap: true,
+            ),
+            SliverSafeArea(
+              sliver: SliverToBoxAdapter(
+                child: _pages[
+                    _selectedIndex], // Display current page based on index
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: curvedBottomNav(),
       ),
     );
   }
@@ -38,9 +58,9 @@ class _HomeViewState extends State<HomeView> {
       animationDuration: const Duration(milliseconds: 300),
       onTap: (index) => setState(() => _selectedIndex = index),
       items: const [
-        Icon(Icons.settings),
+        Icon(Icons.settings, color: Colors.white),
         Icon(Icons.home, color: Colors.white),
-        Icon(Icons.chat),
+        Icon(Icons.chat, color: Colors.white),
       ],
     );
   }
