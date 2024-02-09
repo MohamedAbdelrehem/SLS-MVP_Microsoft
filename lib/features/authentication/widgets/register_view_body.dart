@@ -202,7 +202,7 @@ class RegisterViewBody extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).go('/');
+                      GoRouter.of(context).go('/login');
                     },
                     child: Text(' Login Now',
                         style: TextStyle(

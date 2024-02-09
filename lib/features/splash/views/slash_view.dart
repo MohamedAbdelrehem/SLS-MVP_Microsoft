@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sls_mvp_microsoft/features/splash/widgets/splash_view_body.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
+import 'package:sls_mvp_microsoft/features/splash/views/widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
@@ -7,6 +8,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: kPrimaryColor,
       body: SplashViewBody(),
     );
   }

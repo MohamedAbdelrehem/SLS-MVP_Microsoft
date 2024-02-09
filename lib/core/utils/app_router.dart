@@ -3,6 +3,7 @@ import 'package:sls_mvp_microsoft/features/authentication/login_view.dart';
 import 'package:sls_mvp_microsoft/features/authentication/register_view.dart';
 import 'package:sls_mvp_microsoft/features/home/home_view.dart';
 import 'package:sls_mvp_microsoft/features/monitoring/monitoring_view.dart';
+import 'package:sls_mvp_microsoft/features/splash/views/slash_view.dart';
 
 abstract class AppRouter {
   // static const kHomeView = '/homeView';
@@ -10,6 +11,10 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
+        path: '/login',
         builder: (context, state) => const LoginView(),
       ),
       GoRoute(
