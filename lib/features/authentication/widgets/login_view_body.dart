@@ -121,18 +121,18 @@ class LoginViewBody extends StatelessWidget {
                 child: InkWell(
                   //GestureDetector to InkWell for animation
                   onTap: () {
-                    if (_phoneNumberController.text == "01011929211" &&
-                        _passwordController.text == "123123123") {
-                      GoRouter.of(context).go('/home');
-                    } else {
-                      //show error snack
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Error: Invalid credentials'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
+                    // if (_phoneNumberController.text == "01011929211" &&
+                    //     _passwordController.text == "123123123") {
+                    GoRouter.of(context).go('/home');
+                    // } else {
+                    //show error snack
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Error: Invalid credentials'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    // }
                   },
 
                   child: Ink(
