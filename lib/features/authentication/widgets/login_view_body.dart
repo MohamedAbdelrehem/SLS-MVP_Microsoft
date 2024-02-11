@@ -25,8 +25,6 @@ class LoginViewBody extends StatelessWidget {
                 color: kPrimaryColor,
               ),
 
-              SizedBox(height: 10),
-
               //welcome message
               Text(
                 "Welcome Back!",
