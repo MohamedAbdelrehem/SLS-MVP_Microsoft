@@ -12,6 +12,7 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.hardEdge,
       width: width,
       height: height,
       decoration: BoxDecoration(
