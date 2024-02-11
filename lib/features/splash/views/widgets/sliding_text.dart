@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
+import 'package:sls_mvp_microsoft/core/utils/assets.dart';
 
 class SlidingText extends StatelessWidget {
   const SlidingText({
@@ -15,11 +19,10 @@ class SlidingText extends StatelessWidget {
         builder: (context, _) {
           return SlideTransition(
             position: slidingAnimation,
-            child: const Text(
-              'SLS',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 120, color: Color.fromARGB(255, 255, 255, 255)),
+            child: SvgPicture.asset(
+              AssetsData.logoText,
+              height: 50,
+              color: kBGColor,
             ),
           );
         });
