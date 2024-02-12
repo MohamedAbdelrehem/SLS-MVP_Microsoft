@@ -40,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       children: [
         SvgPicture.asset(
           AssetsData.logo,
-          height: 160,
+          height: 140,
           color: kBGColor,
         ),
         FadeTransition(

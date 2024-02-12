@@ -21,7 +21,7 @@ class SlidingText extends StatelessWidget {
             position: slidingAnimation,
             child: SvgPicture.asset(
               AssetsData.logoText,
-              height: 50,
+              height: 70,
               color: kBGColor,
             ),
           );

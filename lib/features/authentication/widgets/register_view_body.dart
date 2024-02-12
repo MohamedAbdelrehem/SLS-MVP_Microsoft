@@ -23,12 +23,13 @@ class RegisterViewBody extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(height: 20),
               SvgPicture.asset(
                 AssetsData.logo,
-                height: 150,
+                height: 120,
                 color: kPrimaryColor,
               ),
-
+              SizedBox(height: 5),
               //welcome message
               Text(
                 "Hello there!",

@@ -21,10 +21,10 @@ class LoginViewBody extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AssetsData.logo,
-                height: 150,
+                height: 130,
                 color: kPrimaryColor,
               ),
-
+              SizedBox(height: 20),
               //welcome message
               Text(
                 "Welcome Back!",
