@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:sls_mvp_microsoft/features/authentication/login_view.dart';
-import 'package:sls_mvp_microsoft/features/authentication/register_view.dart';
-import 'package:sls_mvp_microsoft/features/home/home_view.dart';
+import 'package:sls_mvp_microsoft/features/authentication/presentation/view/login_view.dart';
+import 'package:sls_mvp_microsoft/features/authentication/presentation/view/register_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/home_view.dart';
+
 import 'package:sls_mvp_microsoft/features/monitoring/monitoring_view.dart';
 import 'package:sls_mvp_microsoft/features/splash/views/slash_view.dart';
 

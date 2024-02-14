@@ -2,8 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
-import 'package:sls_mvp_microsoft/features/home/widgets/Map/mapLeaflet_view.dart';
-import 'package:sls_mvp_microsoft/features/home/widgets/Thermometer/thermo_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/widgets/Thermometer/thermo_view.dart';
+
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/fuel_gauge.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -39,10 +40,10 @@ class MonitorViewBody extends StatelessWidget {
                 // const SizedBox(
                 //   height: 20,
                 // ),
-                CustomContainer(
+                const CustomContainer(
                   width: 500,
                   height: 380,
-                  child: const ModelViewer(
+                  child: ModelViewer(
                     backgroundColor: Colors.white,
                     src: 'assets/car.glb',
                     alt: '3d car model',
