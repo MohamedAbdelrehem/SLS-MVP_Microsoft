@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "796822266355",
+    "firebase_url": "https://slsp-a88d6-default-rtdb.firebaseio.com",
+    "project_id": "slsp-a88d6",
+    "storage_bucket": "slsp-a88d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796822266355:android:faf5ebd9483fed10aeb286",
+        "android_client_info": {
+          "package_name": "com.example.sls_mvp_microsoft"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNZv7JCQ4D-ielRfkTL0N0JxMDoyFMUY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
