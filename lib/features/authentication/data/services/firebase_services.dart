@@ -27,15 +27,23 @@ class FirebaseAuthService {
   Future<User?> signinWithEmailAndPassword(
       String email, String password) async {
     try {
-      UserCredential user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      // print('inside firebase');
+      // print(email);
+      // print(password);
+      UserCredential user = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      // print('outside firebase');
     } on FirebaseAuthException catch (e) {
+      // print('inside firebaseerror ');
+
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
     }
+    // print('beore return null');
+
     return null;
   }
 
