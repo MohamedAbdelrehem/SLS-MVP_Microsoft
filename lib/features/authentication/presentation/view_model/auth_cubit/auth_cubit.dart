@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
@@ -11,12 +12,31 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  Future<void> registerUser(String email, String password) async {
+  Future<void> registerUser(
+      {required String firstname,
+      required String lastname,
+      required String email,
+      required String role,
+      required String managercode,
+      required String password}) async {
     emit(RegisterLoading());
     try {
-      await FirebaseAuthService().signupWithEmailAndPassword(email, password);
-      // UserCredential user = await FirebaseAuth.instance
-      //     .createUserWithEmailAndPassword(email: email, password: password);
+      // await FirebaseAuthService().signupWithEmailAndPassword(email, password);
+      UserCredential user = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      print('Registration error: $e');
+      emit(RegisterFailure());
+      return;
+    }
+    try {
+      FirebaseFirestoreService().addUser(
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        role: role,
+        managercode: managercode,
+      );
       emit(RegisterSuccess());
     } catch (e) {
       emit(RegisterFailure());
@@ -32,7 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       // print('before firebase');
 
-      await FirebaseAuthService().signinWithEmailAndPassword(email, password);
+      // await FirebaseAuthService().signinWithEmailAndPassword(email, password);
       // print('after firebase');
 
       UserCredential user = await FirebaseAuth.instance

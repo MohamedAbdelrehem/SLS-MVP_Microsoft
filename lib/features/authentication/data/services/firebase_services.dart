@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -50,4 +51,26 @@ class FirebaseAuthService {
   // Future<void> userSignOut() async {
   //   await auth.signOut();
   // }
+}
+
+class FirebaseFirestoreService {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  Future<void> addUser(
+      {required String firstname,
+      required String lastname,
+      required String email,
+      required String role,
+      required String managercode}) {
+    return users
+        .add({
+          'first_name': firstname,
+          'last_name': lastname,
+          'email_address': email,
+          'role': role,
+          'manager_code': managercode
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
 }

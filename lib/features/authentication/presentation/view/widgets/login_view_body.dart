@@ -123,7 +123,7 @@ class LoginViewBody extends StatelessWidget {
                               //   ),
                               // );
                             },
-                            child: const Text("forgot ?",
+                            child: const Text("forgot password?",
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,

@@ -198,7 +198,12 @@ class RegisterViewBody extends StatelessWidget {
                         onTap: () {
                           print("Sign Up button tapped!");
                           BlocProvider.of<AuthCubit>(context).registerUser(
-                              _emailController.text, _passwordController.text);
+                              firstname: _firstNameController.text,
+                              lastname: _lastNameController.text,
+                              email: _emailController.text,
+                              role: 'Manager',
+                              managercode: '',
+                              password: _passwordController.text);
                         },
                         child: Ink(
                           //Container to Ink for animation
