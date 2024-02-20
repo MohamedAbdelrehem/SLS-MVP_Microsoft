@@ -22,13 +22,14 @@ class DetailsPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            GoRouter.of(context).go('/home');
+            // GoRouter.of(context).go('/home');
+            Navigator.pop(context);
           },
         ),
         title: Text('Monitoring $name',
             style: TextStyle(
                 fontSize: 20,
-                color: kPrimaryColor,
+                color: Colors.amber,
                 fontWeight: FontWeight.bold)),
       ),
       body: MonitorViewBody(

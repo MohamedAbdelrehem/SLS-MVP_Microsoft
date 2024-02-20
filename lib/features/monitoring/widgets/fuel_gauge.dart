@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class FuelGauge extends StatefulWidget {
-  const FuelGauge({Key? key, required this.title}) : super(key: key);
-
+  const FuelGauge({Key? key, required this.title, required this.fuel}) : super(key: key);
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -12,7 +11,7 @@ class FuelGauge extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
+final num fuel;
   final String title;
 
   @override
@@ -95,9 +94,9 @@ class FuelGaugeState extends State<FuelGauge> {
                     endWidth: 35,
                     color: Colors.black)
               ],
-              pointers: const <GaugePointer>[
+              pointers:  <GaugePointer>[
                 NeedlePointer(
-                    value: 50.00,
+                    value: widget.fuel.toDouble(),
                     needleEndWidth: 7,
                     // onValueChanged: onPointerValueChanged,
                     needleStartWidth: 1,

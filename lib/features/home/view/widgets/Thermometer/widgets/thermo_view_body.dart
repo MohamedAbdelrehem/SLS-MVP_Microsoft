@@ -7,12 +7,14 @@ import 'slider.dart';
 import 'thermo.dart';
 
 class ThermoViewBody extends StatelessWidget {
-  final ValueNotifier<double> temperature = ValueNotifier(20.0);
+  final num val;
 
-  ThermoViewBody({super.key});
+  ThermoViewBody({super.key, required this.val});
 
   @override
   Widget build(BuildContext context) {
+      final ValueNotifier<double> temperature = ValueNotifier(val.toDouble());
+
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     print('TemperatureView.build... ${size.height}');
@@ -30,9 +32,9 @@ class ThermoViewBody extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    '  ${temperature.value.toInt()}°',
+                    '  ${val}°',
                     style: style?.copyWith(
-                        fontWeight: FontWeight.w500, color: kPrimaryColor),
+                        fontWeight: FontWeight.w500, color: Colors.grey),
                     textAlign: TextAlign.center,
                   ),
                 ),

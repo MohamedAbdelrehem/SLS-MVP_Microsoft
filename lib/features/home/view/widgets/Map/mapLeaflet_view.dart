@@ -4,6 +4,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 
 class MapLeafletView extends StatefulWidget {
+  const MapLeafletView({super.key});
+
   @override
   _MapLeafletViewState createState() => _MapLeafletViewState();
 }
@@ -51,7 +53,7 @@ class _MapLeafletViewState extends State<MapLeafletView> {
       options: MapOptions(
         center: _currentLocation != null
             ? LatLng(_currentLocation!.latitude!, _currentLocation!.longitude!)
-            : LatLng(51.509364, -0.128928),
+            : const LatLng(51.509364, -0.128928),
         zoom: 9.2,
       ),
       children: [
@@ -67,7 +69,7 @@ class _MapLeafletViewState extends State<MapLeafletView> {
               point: _currentLocation != null
                   ? LatLng(
                       _currentLocation!.latitude!, _currentLocation!.longitude!)
-                  : LatLng(51.509364, -0.128928),
+                  : const LatLng(51.509364, -0.128928),
               child: Container(
                 child: const Icon(
                   Icons.location_on,

@@ -19,7 +19,7 @@ class TotalVehiclesPieChart extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'Total Vehicles',
                     style: GoogleFonts.rubik(

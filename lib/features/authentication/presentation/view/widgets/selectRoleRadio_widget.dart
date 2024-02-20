@@ -4,6 +4,8 @@ import 'package:sls_mvp_microsoft/constants.dart';
 final _managerCodeController = TextEditingController();
 
 class RadioButtonsGroup extends StatefulWidget {
+  const RadioButtonsGroup({super.key});
+
   @override
   _RadioButtonsGroupState createState() => _RadioButtonsGroupState();
 }
@@ -28,12 +30,12 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
                 });
               },
             ),
-            Text('Manager',
+            const Text('Manager',
                 style: TextStyle(
                     fontSize: 16,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.w400)),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Radio(
               value: 'Operator',
               groupValue: _selectedRole,
@@ -43,12 +45,12 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
                 });
               },
             ),
-            Text('Operator',
+            const Text('Operator',
                 style: TextStyle(
                     fontSize: 16,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.w400)),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Radio(
               value: 'Driver',
               groupValue: _selectedRole,
@@ -58,14 +60,14 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
                 });
               },
             ),
-            Text('Driver',
+            const Text('Driver',
                 style: TextStyle(
                     fontSize: 16,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.w400)),
           ],
         ),
-        SizedBox(height: 25),
+        const SizedBox(height: 25),
 
         // Manager code text box
         Padding(
@@ -81,13 +83,13 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
               child: TextField(
                 controller: _managerCodeController,
                 enabled: _selectedRole != 'Manager' ? true : false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none, hintText: 'Manger Code'),
               ),
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ]),
     );
   }

@@ -21,17 +21,19 @@ class LoginViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginFailure) {
           showSnackBar(context, "invalid credentials");
-        }
-      },
-      builder: (context, state) {
-        if (state is LoginSuccess) {
+        } else if (state is LoginSuccess) {
+          print('hello');
           GoRouter.of(context).go('/home');
+          print('bye');
           // } else if (state is LoginFailure) {
           //   return const Text('there is an error',
           //       style: TextStyle(color: Colors.red, fontSize: 30));
-        } else if (state is LoginLoading) {
+        } 
+      },
+      builder: (context, state) {
+        if (state is LoginLoading) {
           return const CustomLoadingIndicator();
-        } else {
+        } else if(state is AuthInitial || state is LoginFailure){
           return SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -189,8 +191,10 @@ class LoginViewBody extends StatelessWidget {
             ),
           );
         }
-        return const Text('');
+                return const Text('');
+
       },
+      
     );
   }
 }

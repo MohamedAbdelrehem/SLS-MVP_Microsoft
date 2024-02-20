@@ -33,7 +33,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: '/home',
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) {print('insideapprouter');return const HomeView();},
       ),
     ],
   );

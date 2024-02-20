@@ -18,7 +18,7 @@ final _firstNameController = TextEditingController();
 final _lastNameController = TextEditingController();
 
 class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({Key? key}) : super(key: key);
+  const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class RegisterViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        
         if (state is RegisterSuccess) {
           GoRouter.of(context).go('/login');
           // }else if (state is RegisterFailure) {
@@ -143,7 +144,7 @@ class RegisterViewBody extends StatelessWidget {
                     const SizedBox(height: 10),
 
                     //choose role
-                    RadioButtonsGroup(),
+                    const RadioButtonsGroup(),
 
                     //password
                     Padding(

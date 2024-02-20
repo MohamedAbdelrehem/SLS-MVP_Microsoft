@@ -2,9 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/utils/app_router.dart';
+import 'package:sls_mvp_microsoft/features/home/view_model/car_realtime_cubit/car_realtime_cubit.dart';
+import 'package:sls_mvp_microsoft/features/home/view_model/realtime_cubit/realtime_cubit.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/signout_cubit/signout_cubit.dart';
 import 'package:sls_mvp_microsoft/firebase_options.dart';
 
@@ -26,8 +27,15 @@ class SLS extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignoutCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SignoutCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RealtimeCubit(),
+        ),
+      ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,

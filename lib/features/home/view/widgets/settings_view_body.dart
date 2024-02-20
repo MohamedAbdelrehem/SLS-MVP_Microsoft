@@ -11,7 +11,7 @@ class SettingsViewBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
       child: Expanded(
-        child: Container(
+        child: SizedBox(
           width: 500,
           height: 500,
           child: Padding(
@@ -29,14 +29,14 @@ class SettingsViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Manager code',
                       style: Styles.textStyle18,
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: 20),
                     Text(
                       '5D8SV896',
                     ),
@@ -62,11 +62,11 @@ class SettingsViewBody extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Language', style: Styles.textStyle18),
-                    const SizedBox(width: 20),
+                    SizedBox(width: 20),
                     Text(
                       'Arabic',
                     ),
