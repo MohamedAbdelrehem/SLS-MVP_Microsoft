@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.sls_mvp_microsoft"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34    // 34 is the latest version of Android SDK
     ndkVersion flutter.ndkVersion
 
     compileOptions {
