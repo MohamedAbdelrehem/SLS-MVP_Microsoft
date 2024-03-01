@@ -23,7 +23,7 @@ class DetailsPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             // GoRouter.of(context).go('/home');
-            Navigator.pop(context);
+context.pop();
           },
         ),
         title: Text('Monitoring $name',

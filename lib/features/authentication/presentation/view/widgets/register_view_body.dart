@@ -16,28 +16,39 @@ final _confirmpasswordController = TextEditingController();
 // final _emailaddressController = TextEditingController();
 final _firstNameController = TextEditingController();
 final _lastNameController = TextEditingController();
+final _managerCodeController = TextEditingController();
 
 class RegisterViewBody extends StatelessWidget {
   const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterFailure) {
           showSnackBar(context, "weak password or email already exists");
-        }
-      },
-      builder: (context, state) {
-        
-        if (state is RegisterSuccess) {
+        }        
+        else if (state is RegisterSuccess) {
           GoRouter.of(context).go('/login');
           // }else if (state is RegisterFailure) {
           //   return const Text('there is an error',
           //       style: TextStyle(color: Colors.red, fontSize: 30));
-        } else if (state is RegisterLoading) {
+        }  
+      },
+      builder: (context, state) {
+if (state is RegisterLoading) {
           return const CustomLoadingIndicator();
-        } else {
+        } else if(state is RegisterFailure || state is AuthInitial){
+                    String selectedRole = '';
+                    bool enabled= true;
+              void onRoleSelected(String role) {
+    selectedRole = role;
+    if(selectedRole == 'Manager'){enabled= true;}else{enabled=false;}
+  }
+  //               void getCode(String codeee) {
+  //   code = codeee;
+  // }
           return SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -144,7 +155,32 @@ class RegisterViewBody extends StatelessWidget {
                     const SizedBox(height: 10),
 
                     //choose role
-                    const RadioButtonsGroup(),
+                     RadioButtonsGroup(onRoleSelected: (role){
+                          onRoleSelected(role);
+                    }),
+                    const SizedBox(height: 25),
+
+        // Manager code text box
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              border: Border.all(color: kPrimaryColor),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: TextField(
+                controller: _managerCodeController,
+                // enabled: enabled,
+                decoration: const InputDecoration(
+                    border: InputBorder.none, hintText: 'Manager Code'),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
 
                     //password
                     Padding(
@@ -202,8 +238,8 @@ class RegisterViewBody extends StatelessWidget {
                               firstname: _firstNameController.text,
                               lastname: _lastNameController.text,
                               email: _emailController.text,
-                              role: 'Manager',
-                              managercode: '',
+                              role: selectedRole,
+                              managercode: _managerCodeController.text,
                               password: _passwordController.text);
                         },
                         child: Ink(

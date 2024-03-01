@@ -57,13 +57,17 @@ class FirebaseFirestoreService {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   Future<void> addUser(
-      {required String firstname,
+      {
+        required String documentId,
+        required String firstname,
       required String lastname,
       required String email,
       required String role,
       required String managercode}) {
-    return users
-        .add({
+            final userRef = users.doc(documentId);
+
+    return userRef
+        .set({
           'first_name': firstname,
           'last_name': lastname,
           'email_address': email,

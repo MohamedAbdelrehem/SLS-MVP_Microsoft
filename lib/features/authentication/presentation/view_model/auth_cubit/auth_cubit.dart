@@ -19,17 +19,23 @@ class AuthCubit extends Cubit<AuthState> {
       required String managercode,
       required String password}) async {
     emit(RegisterLoading());
+    String? userid;
     try {
       // await FirebaseAuthService().signupWithEmailAndPassword(email, password);
-      UserCredential user = await FirebaseAuth.instance
+      UserCredential users = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+  userid =users.user?.uid;
+
     } catch (e) {
       print('Registration error: $e');
       emit(RegisterFailure());
       return;
     }
+    print(userid);
+
     try {
       FirebaseFirestoreService().addUser(
+        documentId: userid!,
         firstname: firstname,
         lastname: lastname,
         email: email,

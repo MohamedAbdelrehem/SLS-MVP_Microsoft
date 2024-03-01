@@ -23,7 +23,7 @@ class LoginViewBody extends StatelessWidget {
           showSnackBar(context, "invalid credentials");
         } else if (state is LoginSuccess) {
           print('hello');
-          GoRouter.of(context).go('/home');
+          GoRouter.of(context).push('/home');
           print('bye');
           // } else if (state is LoginFailure) {
           //   return const Text('there is an error',

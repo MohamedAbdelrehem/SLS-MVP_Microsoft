@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:sls_mvp_microsoft/features/authentication/presentation/view/login_view.dart';
 import 'package:sls_mvp_microsoft/features/authentication/presentation/view/register_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/add_car.dart';
 import 'package:sls_mvp_microsoft/features/home/view/home_view.dart';
 
 import 'package:sls_mvp_microsoft/features/monitoring/monitoring_view.dart';
@@ -28,6 +29,10 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
+        path: '/cars',
+        builder: (context, state) => const CarView(),
+      ),
+            GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterView(),
       ),

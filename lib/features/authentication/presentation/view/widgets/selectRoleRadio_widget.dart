@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
 
-final _managerCodeController = TextEditingController();
 
 class RadioButtonsGroup extends StatefulWidget {
-  const RadioButtonsGroup({super.key});
+  final void Function(String role) onRoleSelected; // Callback function
+  const RadioButtonsGroup({required this.onRoleSelected, super.key});
 
   @override
   _RadioButtonsGroupState createState() => _RadioButtonsGroupState();
@@ -12,7 +12,6 @@ class RadioButtonsGroup extends StatefulWidget {
 
 class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
   String _selectedRole = 'Manager';
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,9 +24,11 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
               value: 'Manager',
               groupValue: _selectedRole,
               onChanged: (value) {
-                setState(() {
-                  _selectedRole = value!;
-                });
+
+  setState(() {
+    _selectedRole = value!;
+    widget.onRoleSelected(value);
+  });
               },
             ),
             const Text('Manager',
@@ -40,9 +41,11 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
               value: 'Operator',
               groupValue: _selectedRole,
               onChanged: (value) {
-                setState(() {
-                  _selectedRole = value!;
-                });
+
+  setState(() {
+    _selectedRole = value!;
+    widget.onRoleSelected(value);
+  });
               },
             ),
             const Text('Operator',
@@ -55,9 +58,11 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
               value: 'Driver',
               groupValue: _selectedRole,
               onChanged: (value) {
-                setState(() {
-                  _selectedRole = value!;
-                });
+
+  setState(() {
+    _selectedRole = value!;
+    widget.onRoleSelected(value);
+  });
               },
             ),
             const Text('Driver',
@@ -67,29 +72,7 @@ class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
                     fontWeight: FontWeight.w400)),
           ],
         ),
-        const SizedBox(height: 25),
-
-        // Manager code text box
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              border: Border.all(color: kPrimaryColor),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: TextField(
-                controller: _managerCodeController,
-                enabled: _selectedRole != 'Manager' ? true : false,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Manger Code'),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
+        
       ]),
     );
   }

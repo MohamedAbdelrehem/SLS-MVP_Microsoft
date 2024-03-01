@@ -1,10 +1,14 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
+import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Thermometer/thermo_view.dart';
-import 'package:sls_mvp_microsoft/features/home/view_model/realtime_cubit/realtime_cubit.dart';
+import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/fuel_gauge.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -29,17 +33,32 @@ class MonitorViewBody extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25, top: 30),
-            child: BlocBuilder<RealtimeCubit, RealtimeState>(
+            child: BlocBuilder<VehiclesCubit, VehiclesState>( 
               
               builder: (context, state) {
-                if(state is RealtimeInitial){
-                  BlocProvider.of<RealtimeCubit>(context).loadCarData();
-                }else if(state is RealtimeLoadiang){return const CircularProgressIndicator();
-                }else if(state is RealtimeSuccess){
+    if(state is VehichlesGetLoading){return const CustomLoadingIndicator();
+                }else if(state is VehiclesGetSuccess){
                   Color scolor= Colors.grey;
                  Color mcolor= Colors.grey;
 
-                  Map<String,dynamic> car = BlocProvider.of<RealtimeCubit>(context).carParsed;
+                  Map<String,dynamic> vehicle = BlocProvider.of<VehiclesCubit>(context).carParsed[int.parse(ignite)];
+                                    Map<String,dynamic> car = BlocProvider.of<VehiclesCubit>(context).carParsedrealtime[int.parse(ignite)];
+// Future<String> downloadGLB(String url) async {
+//   final dio = Dio();
+//   final response = await dio.get(url);
+
+//   if (response.statusCode == 200) {
+//         print('thsidfffffffffffffffffffffffffffffffffwe4terterre');
+
+//     final data = response.data is String ? response.data : utf8.decode(response.data);
+//     print('thsidfffffffffffffffffffffffffffffffffwe4terterre');
+//     print(data);
+//     return data;
+//   } else {
+//     throw Exception('Failed to download GLB file: ${response.statusCode}');
+//   }
+// }
+
                   if (car['sleep'] != null ) {
   scolor= car['sleep'] ? Colors.red : Colors.green;
 } else {
@@ -60,25 +79,25 @@ return Column(
                     //   Icons.power_settings_new,
                     //   color: Color(col),
                     // ),
-                    // Text('temparture: $temp'),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // const CustomContainer(
-                    //   width: 500,
-                    //   height: 380,
-                    //   child: ModelViewer(
-                    //     backgroundColor: Colors.white,
-                    //     src: 'assets/car.glb',
-                    //     alt: '3d car model',
-                    //     ar: true,
-                    //     autoRotate: true,
-                    //     disableZoom: true,
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
+                    Text('temparture: ${vehicle['vehicle_3d_model_url']}'),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                     CustomContainer(
+                      width: 500,
+                      height: 380,
+                      child: ModelViewer(
+                            backgroundColor: Colors.white,
+                            src: vehicle['vehicle_3d_model_url'],
+                            alt: '3d car model',
+                            ar: true,
+                            autoRotate: true,
+                            disableZoom: true,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                      Row(
                       children: [
                         Expanded(
@@ -100,14 +119,14 @@ return Column(
                         ),
                       ],
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-                    //   child: CustomContainer(
-                    //     width: 500,
-                    //     height: 380,
-                    //     child: MapLeafletView(),
-                    //   ),
-                    // ),
+                    const Padding(
+                      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                      child: CustomContainer(
+                        width: 500,
+                        height: 380,
+                        child: MapLeafletView(),
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),

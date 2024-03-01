@@ -31,13 +31,15 @@ dependencies:
   cloud_firestore: ^4.15.4
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
+  dio: ^5.4.1
+  file_picker: ^6.1.1
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.4
   firebase_database: ^10.4.5
+  firebase_storage: ^11.6.6
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
-  # flutter_gemini: ^2.0.1
   flutter_lints: ^3.0.1
   flutter_map: ^6.1.0
   flutter_svg: ^2.0.9
@@ -45,6 +47,7 @@ dependencies:
   google_fonts: ^6.1.0
   location: ^5.0.3
   model_viewer_plus: ^1.7.0
+  path_provider: ^2.1.2
   syncfusion_flutter_gauges: ^24.2.4
   url_launcher: ^6.2.4
 
