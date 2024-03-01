@@ -7,12 +7,11 @@ import 'package:sls_mvp_microsoft/core/widgets/custom_snack_bar.dart';
 
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/neumorphic_expenses/totalVehicles_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view_model/fetch_users_cubit/fetch_users_cubit.dart';
 // import 'package:sls_mvp_microsoft/features/home/view_model/car_realtime_cubit/car_realtime_cubit.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 // import 'package:sls_mvp_microsoft/features/home/widgets/Map/mapbox_view.dart';
 import 'package:sls_mvp_microsoft/features/monitoring/monitoring_view.dart';
-
-
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -22,117 +21,212 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<VehiclesCubit>(context).getVehicle();
-        BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+        BlocProvider.of<FetchUsersCubit>(context).getCurrentUserData();
 
+    BlocProvider.of<VehiclesCubit>(context).getVehicle();
+    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
   }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(20),
-          child: CustomContainer(
-            width: 500,
-            height: 350,
-            child: TotalVehiclesPieChart(),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Padding(
-          padding: EdgeInsets.all(30),
-          child: CustomContainer(
-            width: 500,
-            height: 380,
-            child: MapLeafletView(),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(5),
-          child: Align(alignment: Alignment.centerLeft,child: ElevatedButton(onPressed: (){
-            GoRouter.of(context).push('/cars');
-            
-          }, child:const Icon(Icons.add) ),),
-        ),
-                Padding(
-          padding: const EdgeInsets.all(5),
-          child: Align(alignment: Alignment.centerLeft,child: 
-          IconButton(onPressed: (){    BlocProvider.of<VehiclesCubit>(context).getVehicle();
-        BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
-}, icon: Icon(Icons.refresh))
-          ),
-        ),
-        
-        Padding(
-          padding: const EdgeInsets.all(30),
-          child: CustomContainer(
-            width: 500,
-            height: 380,
-            child: tableV(),
-          ),
-        ),
-      ],
-    ));
+
+
+    return BlocBuilder<FetchUsersCubit, FetchUsersState>(
+      builder: (context, state) {
+        if(state is FetchUsersLoading){return const CustomLoadingIndicator();}
+        else if(state is FetchUsersFailure){
+          return const Text('error fetching user so cant display');
+        }else if(state is FetchUsersSuccess){
+              Map<String, dynamic> userdata =
+        BlocProvider.of<FetchUsersCubit>(context).userdata;
+          if(userdata['role']=='Manager'){
+            return SingleChildScrollView(
+            child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: CustomContainer(
+                width: 500,
+                height: 350,
+                child: TotalVehiclesPieChart(),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: CustomContainer(
+                width: 500,
+                height: 380,
+                child: MapLeafletView(),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+
+  TextButton(onPressed: (){}, child: Text('Drivers')),
+    TextButton(onPressed: (){}, child: Text('Operators')),
+
+                        const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: ElevatedButton(
+                    onPressed: () {
+                      GoRouter.of(context).push('/cars');
+                    },
+                    child: const Icon(Icons.add)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                      onPressed: () {
+                        BlocProvider.of<VehiclesCubit>(context).getVehicle();
+                        BlocProvider.of<VehiclesCubit>(context)
+                            .getVehiclerealtime();
+                      },
+                      icon: Icon(Icons.refresh))),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: CustomContainer(
+                width: 500,
+                height: 380,
+                child: tableV(),
+              ),
+            ),
+          ],
+        ));
+          }
+          else if(userdata['role']=='Operator'){
+return SingleChildScrollView(
+            child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: CustomContainer(
+                width: 500,
+                height: 350,
+                child: TotalVehiclesPieChart(),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: CustomContainer(
+                width: 500,
+                height: 380,
+                child: MapLeafletView(),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+
+  TextButton(onPressed: (){}, child: Text('Drivers')),
+                        const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: ElevatedButton(
+                    onPressed: () {
+                      GoRouter.of(context).push('/cars');
+                    },
+                    child: const Icon(Icons.add)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                      onPressed: () {
+                        BlocProvider.of<VehiclesCubit>(context).getVehicle();
+                        BlocProvider.of<VehiclesCubit>(context)
+                            .getVehiclerealtime();
+                      },
+                      icon: Icon(Icons.refresh))),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: CustomContainer(
+                width: 500,
+                height: 380,
+                child: tableV(),
+              ),
+            ),
+          ],
+        ));
+          }
+          else if(userdata['role']== 'Driver'){return Container();}
+ 
+        }else if(state is FetchUsersInitial){return const Column(children: [ Text('this is initial state '),CustomLoadingIndicator()],);}
+        else{return const Text('state management problem');}
+        return Text('another statenamanegment problem');
+       
+      },
+    );
   }
 }
-
 
 class tableV extends StatelessWidget {
   const tableV({super.key});
 
-
- 
-
   @override
   Widget build(BuildContext context) {
-     void _navigateToDetailsPage(String name, String ignite, String temp) {
-    context.pushNamed('DetailsPage',
-        pathParameters: {'name': name, 'ignite': ignite, 'temp': temp});
-  }
+    void _navigateToDetailsPage(String name, String ignite, String temp) {
+      context.pushNamed('DetailsPage',
+          pathParameters: {'name': name, 'ignite': ignite, 'temp': temp});
+    }
+
     // List vehicles=[] ;
     return BlocBuilder<VehiclesCubit, VehiclesState>(
       builder: (context, state) {
-
- if (state is VehichlesGetLoading) {
-  print('entered loading state of GETTING');
+        if (state is VehichlesGetLoading) {
+          print('entered loading state of GETTING');
 
           return const CustomLoadingIndicator();
-        } else if ( state  is VehiclesGetSuccess ) {
+        } else if (state is VehiclesGetSuccess) {
+          List<Map<String, dynamic>> vehicle =
+              BlocProvider.of<VehiclesCubit>(context).carParsed;
+          List<Map<String, dynamic>> car =
+              BlocProvider.of<VehiclesCubit>(context).carParsedrealtime;
+          var imp = car.toString();
+          var t = vehicle.toString();
 
-          List< Map<String,dynamic>> vehicle= BlocProvider.of<VehiclesCubit>(context).carParsed;
-         List< Map<String,dynamic>> car = BlocProvider.of<VehiclesCubit>(context).carParsedrealtime;
-var imp = car.toString();
-var t = vehicle.toString();
+          print('this is very important test $imp');
+          print('this is very important test2 $t');
 
-print('this is very important test $imp');
-print('this is very important test2 $t');
+          Color mcolor = Colors.grey;
+          Color dcolor = Colors.grey;
 
-           Color mcolor = Colors.grey;
-            Color dcolor = Colors.grey;
-
-
-  
           return SingleChildScrollView(
-scrollDirection: Axis.vertical,
+            scrollDirection: Axis.vertical,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-            
               child: DataTable(
-                columns:const <DataColumn>[
+                columns: const <DataColumn>[
                   DataColumn(
                     label: Expanded(
                       child: Text(
-                       "vehicleID",
+                        "vehicleID",
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
@@ -274,51 +368,49 @@ scrollDirection: Axis.vertical,
                     ),
                   ),
                 ],
-                rows: 
-                
-                List<DataRow>.generate(car.length,(index){
-                  if (car[index]['ignition'] != null ) {
-  mcolor= car[index]['ignition'] ? Colors.green : Colors.red;
-} else {
-  // Set a default color or handle the null case here
-  Color mcolor = Colors.grey; // Example default color
-}
-if (car[index]['door'] != null ) {
-  dcolor= car[index]['door'] ? Colors.green : Colors.red;
-} else {
-  // Set a default color or handle the null case here
-  Color dcolor = Colors.grey; // Example default color
-}
-return  DataRow(
+                rows: List<DataRow>.generate(car.length, (index) {
+                  if (car[index]['ignition'] != null) {
+                    mcolor = car[index]['ignition'] ? Colors.green : Colors.red;
+                  } else {
+                    // Set a default color or handle the null case here
+                    Color mcolor = Colors.grey; // Example default color
+                  }
+                  if (car[index]['door'] != null) {
+                    dcolor = car[index]['door'] ? Colors.green : Colors.red;
+                  } else {
+                    // Set a default color or handle the null case here
+                    Color dcolor = Colors.grey; // Example default color
+                  }
+                  return DataRow(
                     cells: <DataCell>[
                       DataCell(
-
-                         Row(
+                        Row(
                           children: [
                             Icon(Icons.local_shipping),
                             SizedBox(
                               width: 10,
                             ),
-                            Text( vehicle[index]['id']),
-                             Text( index.toString()),
-
+                            Text(vehicle[index]['id']),
+                            Text(index.toString()),
                           ],
                         ),
                         onTap: () {
-                          _navigateToDetailsPage(vehicle[index]['id'], index.toString(), '10°c');
+                          _navigateToDetailsPage(
+                              vehicle[index]['id'], index.toString(), '10°c');
                         },
                       ),
-                       DataCell(Icon(Icons.power_settings_new,
-                          color:mcolor,)),
+                      DataCell(Icon(
+                        Icons.power_settings_new,
+                        color: mcolor,
+                      )),
                       DataCell(Text('${car[index]['temp']}°C')),
-                       DataCell(
-                          Icon(Icons.door_front_door, color: dcolor)),
+                      DataCell(Icon(Icons.door_front_door, color: dcolor)),
                       const DataCell(Text('191 KMs')),
                       const DataCell(
                           Text('104', style: TextStyle(color: Colors.red))),
                       const DataCell(Text('28,AI turath street',
                           style: TextStyle(color: Colors.blue))),
-                       DataCell(Text('${car[index]['speed']} Kmph')),
+                      DataCell(Text('${car[index]['speed']} Kmph')),
                       DataCell(Container(
                           padding: const EdgeInsets.all(3),
                           decoration: BoxDecoration(
@@ -338,39 +430,45 @@ return  DataRow(
                       const DataCell(Text('Najeeb Mohammed')),
                       const DataCell(Text('08:07 AM')),
                       const DataCell(Text('04:00 PM')),
-                       DataCell(Text(car[index]['timestamp'])),
+                      DataCell(Text(car[index]['timestamp'])),
                       const DataCell(Icon(Icons.videocam, color: Colors.red)),
-                       DataCell(Text('${car[index]['battery']}volts')),
+                      DataCell(Text('${car[index]['battery']}volts')),
                     ],
                   );
                 }),
-                 
-                  // DataRow(
-                  //   cells: <DataCell>[
-                  //     DataCell(
-                  //       Text('Ahmed'),
-                  //       onTap: () {
-                  //         _navigateToDetailsPage('Ahmed', '19', 'Student');
-                  //       },
-                  //     ),
-                  //     DataCell(Text('19')),
-                  //     DataCell(Text('Student')),
-                  //     DataCell(Text('Student')),
-                  //     DataCell(Text('Student')),
-                  //     DataCell(Text('Student')),
-                  //     DataCell(Text('Student')),
-                  //     DataCell(Text('Student')),
-                  //   ],
-                  // ),
-                
+
+                // DataRow(
+                //   cells: <DataCell>[
+                //     DataCell(
+                //       Text('Ahmed'),
+                //       onTap: () {
+                //         _navigateToDetailsPage('Ahmed', '19', 'Student');
+                //       },
+                //     ),
+                //     DataCell(Text('19')),
+                //     DataCell(Text('Student')),
+                //     DataCell(Text('Student')),
+                //     DataCell(Text('Student')),
+                //     DataCell(Text('Student')),
+                //     DataCell(Text('Student')),
+                //     DataCell(Text('Student')),
+                //   ],
+                // ),
               ),
             ),
           );
-        } else if(state is VehiclesGetFailure){
-          return const Text('error occured ',
-          style: TextStyle(color: Colors.red,fontSize: 20),
+        } else if (state is VehiclesGetFailure) {
+          return const Text(
+            'error occured ',
+            style: TextStyle(color: Colors.red, fontSize: 20),
           );
-        }else if(state is VehiclesInitial){return const Text('this is the initial state of the table ');}else {return const Column(children: [Text('state management'),CustomLoadingIndicator()],);}
+        } else if (state is VehiclesInitial) {
+          return const Text('this is the initial state of the table ');
+        } else {
+          return const Column(
+            children: [Text('state management'), CustomLoadingIndicator()],
+          );
+        }
       },
     );
   }
