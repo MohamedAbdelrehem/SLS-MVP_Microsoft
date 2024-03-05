@@ -79,7 +79,7 @@ return Column(
                     //   Icons.power_settings_new,
                     //   color: Color(col),
                     // ),
-                    // Text('temparture: ${vehicle['vehicle_3d_model_url']}'),
+                    
                     const SizedBox(
                       height: 20,
                     ),
