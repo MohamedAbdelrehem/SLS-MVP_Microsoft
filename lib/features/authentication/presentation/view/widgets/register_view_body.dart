@@ -41,11 +41,11 @@ if (state is RegisterLoading) {
           return const CustomLoadingIndicator();
         } else if(state is RegisterFailure || state is AuthInitial){
                     String selectedRole = '';
-                    bool enabled= true;
+                    // bool enabled= true;
               void onRoleSelected(String role) {
                 print('this is very important test but a new one $role');
     selectedRole = role;
-    if(selectedRole == 'Manager'){enabled= true;}else{enabled=false;}
+    // if(selectedRole == 'Manager'){enabled= true;}else{enabled=false;}
   }
   //               void getCode(String codeee) {
   //   code = codeee;

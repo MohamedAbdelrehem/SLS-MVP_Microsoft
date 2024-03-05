@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
             child: AppBar(
+              automaticallyImplyLeading: false,
               actions: [
                 IconButton(
                     onPressed: () {

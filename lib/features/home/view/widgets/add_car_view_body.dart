@@ -39,7 +39,7 @@ class CarViewBody extends StatelessWidget {
         if(state is VehiclesAddLoading){
           print('entereed loading state of adding');
           return const CustomLoadingIndicator();
-                  }else{
+                  }else {
 String pathpass='';
         String typepass='';
 
@@ -167,6 +167,7 @@ return SafeArea(
 
  DropdownMenuExample(typeselected: (String type) { typepass = type; },),
 
+        const SizedBox(height: 10),
 
                     //signUp in Button
                     Padding(
@@ -178,6 +179,7 @@ return SafeArea(
                           BlocProvider.of<VehiclesCubit>(context).addVehicle(vehicleid: _vehicleidcontroller.text,vehicletype: _vehicletypecontroller.text, vehichlemodel: _vehiclemodelcontroller.text, vehiclecolor:_vehiclecolorcontroller.text, vehiclefueltype: typepass, vehiclefuelcapciaty: num.parse(_vehiclefuelcapacitycontroller.text), vehiclemodel3durlpath: pathpass);
 
                         },
+                        
                         child: Ink(
                           //Container to Ink for animation
                           padding: const EdgeInsets.all(20),

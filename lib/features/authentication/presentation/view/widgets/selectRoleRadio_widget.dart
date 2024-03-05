@@ -13,7 +13,15 @@ class RadioButtonsGroup extends StatefulWidget {
 class _RadioButtonsGroupState extends State<RadioButtonsGroup> {
   String _selectedRole = 'Manager';
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+      widget.onRoleSelected(_selectedRole);
+
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: Column(children: [

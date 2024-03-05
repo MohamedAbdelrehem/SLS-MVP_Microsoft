@@ -27,8 +27,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     super.initState();
         BlocProvider.of<FetchUsersCubit>(context).getCurrentUserData();
 
-    BlocProvider.of<VehiclesCubit>(context).getVehicle();
-    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+
   }
 
   @override
@@ -44,6 +43,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               Map<String, dynamic> userdata =
         BlocProvider.of<FetchUsersCubit>(context).userdata;
           if(userdata['role']=='Manager'){
+                BlocProvider.of<VehiclesCubit>(context).getVehicle();
+    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
             return SingleChildScrollView(
             child: Column(
           children: [
@@ -111,6 +112,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         ));
           }
           else if(userdata['role']=='Operator'){
+                BlocProvider.of<VehiclesCubit>(context).getVehicle();
+    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
 return SingleChildScrollView(
             child: Column(
           children: [

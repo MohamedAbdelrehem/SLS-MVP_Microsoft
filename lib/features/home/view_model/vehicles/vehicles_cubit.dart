@@ -31,13 +31,14 @@ class VehiclesCubit extends Cubit<VehiclesState> {
     emit(VehiclesAddLoading());
 try {
 
-  FirebaseFirestoreServiceVehicles().addVehicle(vehicleid:vehicleid ,vehicletype: vehicletype,vehiclecolor: vehiclecolor,vehichlemodel:vehichlemodel,vehiclefuelcapciaty: vehiclefuelcapciaty,vehiclefueltype: vehiclefueltype,vehiclemodel3durlpath: vehiclemodel3durlpath);
+  await FirebaseFirestoreServiceVehicles().addVehicle(vehicleid:vehicleid ,vehicletype: vehicletype,vehiclecolor: vehiclecolor,vehichlemodel:vehichlemodel,vehiclefuelcapciaty: vehiclefuelcapciaty,vehiclefueltype: vehiclefueltype,vehiclemodel3durlpath: vehiclemodel3durlpath);
 emit(VehiclesAddSuccess());
 }catch (e) { 
 emit(VehiclesAddFailure());
 }
   
   }
+
 
     late List<Map<String,dynamic>> carParsed = [];
         late List<Map<String,dynamic>> carParsedrealtime=[];
