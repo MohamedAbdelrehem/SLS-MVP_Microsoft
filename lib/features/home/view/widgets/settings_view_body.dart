@@ -9,7 +9,7 @@ class SettingsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 110, bottom: 20),
       child: Expanded(
         child: SizedBox(
           width: 500,
