@@ -13,6 +13,8 @@
 //   }
 // }
 
+import 'dart:ui';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,6 +47,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Container(
@@ -58,37 +61,40 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
             child: AppBar(
+              scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
+              elevation: 0,
+              flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(color: Colors.transparent),
+              )),
+              backgroundColor: Colors.white.withAlpha(200),
+              title: const Image(
+                height: 25,
+                image: AssetImage(AssetsData.logoMini),
+              ),
               actions: [
                 IconButton(
                     onPressed: () {
                       BlocProvider.of<SignoutCubit>(context).signout();
                     },
-                    icon: const Icon(Icons.logout))
+                    icon: const Icon(Icons.logout, color: kPrimaryColor))
               ],
-              backgroundColor: kBGColor,
-              leading: const Image(
-                height: 15,
-                image: AssetImage(AssetsData.logoMini),
-              ),
             ),
           ),
         ),
         backgroundColor: kBGColor,
         bottomNavigationBar: curvedBottomNav(),
         body: BlocListener<SignoutCubit, SignoutState>(
-          listener: (context, state) {
-            if (state is SignoutSuccess) {
-              GoRouter.of(context).push('/login');
-            } else if (state is SignoutFailure) {
-              showSnackBar(context, "signout failure");
-            } else if (state is SignoutLoading) {}
-          },
-          child: SafeArea(
-            child:
-                _pages[_selectedIndex], // Display current page based on index
-          ),
-        ));
+            listener: (context, state) {
+              if (state is SignoutSuccess) {
+                GoRouter.of(context).push('/login');
+              } else if (state is SignoutFailure) {
+                showSnackBar(context, "signout failure");
+              } else if (state is SignoutLoading) {}
+            },
+            child: _pages[_selectedIndex]));
   }
 
   CurvedNavigationBar curvedBottomNav() {
