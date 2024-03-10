@@ -67,8 +67,8 @@ class _HomeViewState extends State<HomeView> {
                     icon: const Icon(Icons.logout))
               ],
               backgroundColor: kBGColor,
-              title: const Image(
-                height: 150,
+              leading: const Image(
+                height: 15,
                 image: AssetImage(AssetsData.logoMini),
               ),
             ),
