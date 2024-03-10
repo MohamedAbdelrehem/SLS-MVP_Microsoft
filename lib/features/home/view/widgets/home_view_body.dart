@@ -45,6 +45,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             return SingleChildScrollView(
                 child: Column(
               children: [
+                SizedBox(
+                  height: 90,
+                ),
                 const Padding(
                   padding: EdgeInsets.all(20),
                   child: CustomContainer(
@@ -52,9 +55,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     height: 350,
                     child: TotalVehiclesPieChart(),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(30),
@@ -64,14 +64,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     child: MapLeafletView(),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
                 TextButton(onPressed: () {}, child: Text('Drivers')),
                 TextButton(onPressed: () {}, child: Text('Operators')),
-                const SizedBox(
-                  height: 20,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Align(
@@ -112,6 +106,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             return SingleChildScrollView(
                 child: Column(
               children: [
+                SizedBox(
+                  height: 90,
+                ),
                 const Padding(
                   padding: EdgeInsets.all(20),
                   child: CustomContainer(
@@ -119,9 +116,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     height: 350,
                     child: TotalVehiclesPieChart(),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(30),
@@ -131,13 +125,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     child: MapLeafletView(),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
                 TextButton(onPressed: () {}, child: Text('Drivers')),
-                const SizedBox(
-                  height: 20,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Align(
