@@ -25,165 +25,167 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-        BlocProvider.of<FetchUsersCubit>(context).getCurrentUserData();
-
-
+    BlocProvider.of<FetchUsersCubit>(context).getCurrentUserData();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocBuilder<FetchUsersCubit, FetchUsersState>(
       builder: (context, state) {
-        if(state is FetchUsersLoading){return const CustomLoadingIndicator();}
-        else if(state is FetchUsersFailure){
+        if (state is FetchUsersLoading) {
+          return const CustomLoadingIndicator();
+        } else if (state is FetchUsersFailure) {
           return const Text('error fetching user so cant display');
-        }else if(state is FetchUsersSuccess){
-              Map<String, dynamic> userdata =
-        BlocProvider.of<FetchUsersCubit>(context).userdata;
-          if(userdata['role']=='Manager'){
-                BlocProvider.of<VehiclesCubit>(context).getVehicle();
-    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+        } else if (state is FetchUsersSuccess) {
+          Map<String, dynamic> userdata =
+              BlocProvider.of<FetchUsersCubit>(context).userdata;
+          if (userdata['role'] == 'Manager') {
+            BlocProvider.of<VehiclesCubit>(context).getVehicle();
+            BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
             return SingleChildScrollView(
-            child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20),
-              child: CustomContainer(
-                width: 500,
-                height: 350,
-                child: TotalVehiclesPieChart(),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(30),
-              child: CustomContainer(
-                width: 500,
-                height: 380,
-                child: MapLeafletView(),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-
-  TextButton(onPressed: (){}, child: Text('Drivers')),
-    TextButton(onPressed: (){}, child: Text('Operators')),
-
-                        const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: ElevatedButton(
-                    onPressed: () {
-                      GoRouter.of(context).push('/cars');
-                    },
-                    child: const Icon(Icons.add)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                      onPressed: () {
-                        BlocProvider.of<VehiclesCubit>(context).getVehicle();
-                        BlocProvider.of<VehiclesCubit>(context)
-                            .getVehiclerealtime();
-                      },
-                      icon: Icon(Icons.refresh))),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: CustomContainer(
-                width: 500,
-                height: 380,
-                child: tableV(),
-              ),
-            ),
-          ],
-        ));
+                child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 350,
+                    child: TotalVehiclesPieChart(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(30),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 380,
+                    child: MapLeafletView(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(onPressed: () {}, child: Text('Drivers')),
+                TextButton(onPressed: () {}, child: Text('Operators')),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          GoRouter.of(context).push('/cars');
+                        },
+                        child: const Icon(Icons.add)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                          onPressed: () {
+                            BlocProvider.of<VehiclesCubit>(context)
+                                .getVehicle();
+                            BlocProvider.of<VehiclesCubit>(context)
+                                .getVehiclerealtime();
+                          },
+                          icon: Icon(Icons.refresh))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 380,
+                    child: tableV(),
+                  ),
+                ),
+              ],
+            ));
+          } else if (userdata['role'] == 'Operator') {
+            BlocProvider.of<VehiclesCubit>(context).getVehicle();
+            BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+            return SingleChildScrollView(
+                child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 350,
+                    child: TotalVehiclesPieChart(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(30),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 380,
+                    child: MapLeafletView(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(onPressed: () {}, child: Text('Drivers')),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          GoRouter.of(context).push('/cars');
+                        },
+                        child: const Icon(Icons.add)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                          onPressed: () {
+                            BlocProvider.of<VehiclesCubit>(context)
+                                .getVehicle();
+                            BlocProvider.of<VehiclesCubit>(context)
+                                .getVehiclerealtime();
+                          },
+                          icon: Icon(Icons.refresh))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: CustomContainer(
+                    width: 500,
+                    height: 380,
+                    child: tableV(),
+                  ),
+                ),
+              ],
+            ));
+          } else if (userdata['role'] == 'Driver') {
+            return Container();
           }
-          else if(userdata['role']=='Operator'){
-                BlocProvider.of<VehiclesCubit>(context).getVehicle();
-    BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
-return SingleChildScrollView(
-            child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20),
-              child: CustomContainer(
-                width: 500,
-                height: 350,
-                child: TotalVehiclesPieChart(),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(30),
-              child: CustomContainer(
-                width: 500,
-                height: 380,
-                child: MapLeafletView(),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-
-  TextButton(onPressed: (){}, child: Text('Drivers')),
-                        const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: ElevatedButton(
-                    onPressed: () {
-                      GoRouter.of(context).push('/cars');
-                    },
-                    child: const Icon(Icons.add)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                      onPressed: () {
-                        BlocProvider.of<VehiclesCubit>(context).getVehicle();
-                        BlocProvider.of<VehiclesCubit>(context)
-                            .getVehiclerealtime();
-                      },
-                      icon: Icon(Icons.refresh))),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: CustomContainer(
-                width: 500,
-                height: 380,
-                child: tableV(),
-              ),
-            ),
-          ],
-        ));
-          }
-          else if(userdata['role']== 'Driver'){return Container();}
- 
-        }else if(state is FetchUsersInitial){return const Column(children: [ Text('this is initial state '),CustomLoadingIndicator()],);}
-        else{return const Text('state management problem');}
+        } else if (state is FetchUsersInitial) {
+          return const Column(
+            children: [
+              Text('this is initial state '),
+              CustomLoadingIndicator()
+            ],
+          );
+        } else {
+          return const Text('state management problem');
+        }
         return Text('another statenamanegment problem');
-       
       },
     );
   }
