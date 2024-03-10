@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_snack_bar.dart';
@@ -67,31 +68,46 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 TextButton(onPressed: () {}, child: Text('Drivers')),
                 TextButton(onPressed: () {}, child: Text('Operators')),
                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          GoRouter.of(context).push('/cars');
-                        },
-                        child: const Icon(Icons.add)),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kPrimaryColor),
+                              onPressed: () {
+                                GoRouter.of(context).push('/cars');
+                              },
+                              child:
+                                  const Icon(Icons.add, color: Colors.white)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: kPrimaryColor),
+                                onPressed: () {
+                                  BlocProvider.of<VehiclesCubit>(context)
+                                      .getVehicle();
+                                  BlocProvider.of<VehiclesCubit>(context)
+                                      .getVehiclerealtime();
+                                },
+                                child:
+                                    Icon(Icons.refresh, color: Colors.white))),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                          onPressed: () {
-                            BlocProvider.of<VehiclesCubit>(context)
-                                .getVehicle();
-                            BlocProvider.of<VehiclesCubit>(context)
-                                .getVehiclerealtime();
-                          },
-                          icon: Icon(Icons.refresh))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.only(
+                      left: 15, right: 15, bottom: 20, top: 5),
                   child: CustomContainer(
                     width: 500,
                     height: 380,
@@ -127,31 +143,46 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 ),
                 TextButton(onPressed: () {}, child: Text('Drivers')),
                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          GoRouter.of(context).push('/cars');
-                        },
-                        child: const Icon(Icons.add)),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kPrimaryColor),
+                              onPressed: () {
+                                GoRouter.of(context).push('/cars');
+                              },
+                              child:
+                                  const Icon(Icons.add, color: Colors.white)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: kPrimaryColor),
+                                onPressed: () {
+                                  BlocProvider.of<VehiclesCubit>(context)
+                                      .getVehicle();
+                                  BlocProvider.of<VehiclesCubit>(context)
+                                      .getVehiclerealtime();
+                                },
+                                child:
+                                    Icon(Icons.refresh, color: Colors.white))),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                          onPressed: () {
-                            BlocProvider.of<VehiclesCubit>(context)
-                                .getVehicle();
-                            BlocProvider.of<VehiclesCubit>(context)
-                                .getVehiclerealtime();
-                          },
-                          icon: Icon(Icons.refresh))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.only(
+                      left: 15, right: 15, bottom: 20, top: 5),
                   child: CustomContainer(
                     width: 500,
                     height: 380,
