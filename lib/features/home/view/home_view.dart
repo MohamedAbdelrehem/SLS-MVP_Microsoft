@@ -46,55 +46,58 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                ),
-              ],
-            ),
-            child: AppBar(
-              scrolledUnderElevation: 0,
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              flexibleSpace: ClipRRect(
-                  child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(color: Colors.transparent),
-              )),
-              backgroundColor: Colors.white.withAlpha(200),
-              title: const Image(
-                height: 25,
-                image: AssetImage(AssetsData.logoMini),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                  ),
+                ],
               ),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      BlocProvider.of<SignoutCubit>(context).signout();
-                    },
-                    icon: const Icon(Icons.logout, color: kPrimaryColor))
-              ],
+              child: AppBar(
+                scrolledUnderElevation: 0,
+                automaticallyImplyLeading: false,
+                elevation: 0,
+                flexibleSpace: ClipRRect(
+                    child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(color: Colors.transparent),
+                )),
+                backgroundColor: Colors.white.withAlpha(200),
+                title: const Image(
+                  height: 25,
+                  image: AssetImage(AssetsData.logoMini),
+                ),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        BlocProvider.of<SignoutCubit>(context).signout();
+                      },
+                      icon: const Icon(Icons.logout, color: kPrimaryColor))
+                ],
+              ),
             ),
           ),
-        ),
-        backgroundColor: kBGColor,
-        bottomNavigationBar: curvedBottomNav(),
-        body: BlocListener<SignoutCubit, SignoutState>(
-            listener: (context, state) {
-              if (state is SignoutSuccess) {
-                GoRouter.of(context).push('/login');
-              } else if (state is SignoutFailure) {
-                showSnackBar(context, "signout failure");
-              } else if (state is SignoutLoading) {}
-            },
-            child: _pages[_selectedIndex]));
+          backgroundColor: kBGColor,
+          bottomNavigationBar: curvedBottomNav(),
+          body: BlocListener<SignoutCubit, SignoutState>(
+              listener: (context, state) {
+                if (state is SignoutSuccess) {
+                  GoRouter.of(context).push('/login');
+                } else if (state is SignoutFailure) {
+                  showSnackBar(context, "signout failure");
+                } else if (state is SignoutLoading) {}
+              },
+              child: _pages[_selectedIndex])),
+    );
   }
 
   CurvedNavigationBar curvedBottomNav() {

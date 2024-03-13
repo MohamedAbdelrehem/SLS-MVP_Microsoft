@@ -43,7 +43,7 @@ if (state is RegisterLoading) {
                     String selectedRole = '';
                     // bool enabled= true;
               void onRoleSelected(String role) {
-                print('this is very important test but a new one $role');
+                print('this is very important test but a new  $role');
     selectedRole = role;
     // if(selectedRole == 'Manager'){enabled= true;}else{enabled=false;}
   }

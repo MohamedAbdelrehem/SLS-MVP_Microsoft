@@ -18,6 +18,7 @@ class _ChatViewBodyState extends State<ChatViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Mr. Fixer",
             style: TextStyle(
                 color: kPrimaryColor,

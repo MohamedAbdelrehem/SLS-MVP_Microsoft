@@ -11,23 +11,26 @@ class CustomContainer extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(250, 241, 241, 241),
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 4,
-            offset: const Offset(0.0, 2.0),
-          ),
-        ],
+    return Padding(
+     padding: const EdgeInsets.only(
+      left: 15, right: 15, bottom: 20, top: 5),      child: Container(
+        clipBehavior: Clip.hardEdge,
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(250, 241, 241, 241),
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: const Offset(0.0, 2.0),
+            ),
+          ],
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }

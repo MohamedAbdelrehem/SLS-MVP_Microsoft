@@ -26,6 +26,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('init state again adssdsddsfgsdfsd');
     BlocProvider.of<FetchUsersCubit>(context).getCurrentUserData();
   }
 
@@ -40,7 +41,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         } else if (state is FetchUsersSuccess) {
           Map<String, dynamic> userdata =
               BlocProvider.of<FetchUsersCubit>(context).userdata;
-          if (userdata['role'] == 'Manager') {
+          if (userdata['role'] == 'Manager' || userdata['role']== 'Operator') {
             BlocProvider.of<VehiclesCubit>(context).getVehicle();
             BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
             return SingleChildScrollView(
@@ -49,24 +50,30 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 SizedBox(
                   height: 90,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 350,
-                    child: TotalVehiclesPieChart(),
-                  ),
+                CustomContainer(
+                  width: 500,
+                  height: 350,
+                  child: TotalVehiclesPieChart(),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(30),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 380,
-                    child: MapLeafletView(),
-                  ),
+                CustomContainer(
+                  width: 500,
+                  height: 380,
+                  child: MapLeafletView(),
                 ),
-                TextButton(onPressed: () {}, child: Text('Drivers')),
-                TextButton(onPressed: () {}, child: Text('Operators')),
+                Builder(builder: (context){
+if(userdata['role']=='Manager'){
+return Row(children: [
+                  TextButton(onPressed: () {}, child: const Text('Drivers')),
+                TextButton(onPressed: () {}, child:const Text('Operators')),
+],);
+}else if(userdata['role']=='Operator'){
+  return  TextButton(onPressed: () {}, child: Text('Drivers'));
+}else{
+  return const Text('problem in builder');
+}
+                }),
+
+
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Row(
@@ -105,92 +112,88 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, bottom: 20, top: 5),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 380,
-                    child: tableV(),
-                  ),
+                CustomContainer(
+                  width: 500,
+                  height: 380,
+                  child: tableV(),
                 ),
               ],
             ));
-          } else if (userdata['role'] == 'Operator') {
-            BlocProvider.of<VehiclesCubit>(context).getVehicle();
-            BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
-            return SingleChildScrollView(
-                child: Column(
-              children: [
-                SizedBox(
-                  height: 90,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 350,
-                    child: TotalVehiclesPieChart(),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(30),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 380,
-                    child: MapLeafletView(),
-                  ),
-                ),
-                TextButton(onPressed: () {}, child: Text('Drivers')),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: kPrimaryColor),
-                              onPressed: () {
-                                GoRouter.of(context).push('/cars');
-                              },
-                              child:
-                                  const Icon(Icons.add, color: Colors.white)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: kPrimaryColor),
-                                onPressed: () {
-                                  BlocProvider.of<VehiclesCubit>(context)
-                                      .getVehicle();
-                                  BlocProvider.of<VehiclesCubit>(context)
-                                      .getVehiclerealtime();
-                                },
-                                child:
-                                    Icon(Icons.refresh, color: Colors.white))),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, bottom: 20, top: 5),
-                  child: CustomContainer(
-                    width: 500,
-                    height: 380,
-                    child: tableV(),
-                  ),
-                ),
-              ],
-            ));
+          // } else if (userdata['role'] == 'Operator') {
+          //   BlocProvider.of<VehiclesCubit>(context).getVehicle();
+          //   BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+          //   return SingleChildScrollView(
+          //       child: Column(
+          //     children: [
+          //       SizedBox(
+          //         height: 90,
+          //       ),
+          //       const Padding(
+          //         padding: EdgeInsets.all(20),
+          //         child: CustomContainer(
+          //           width: 500,
+          //           height: 350,
+          //           child: TotalVehiclesPieChart(),
+          //         ),
+          //       ),
+          //       const Padding(
+          //         padding: EdgeInsets.all(30),
+          //         child: CustomContainer(
+          //           width: 500,
+          //           height: 380,
+          //           child: MapLeafletView(),
+          //         ),
+          //       ),
+          //       TextButton(onPressed: () {}, child: Text('Drivers')),
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 15, right: 15),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Padding(
+          //               padding: const EdgeInsets.all(5),
+          //               child: Align(
+          //                 alignment: Alignment.centerLeft,
+          //                 child: ElevatedButton(
+          //                     style: ElevatedButton.styleFrom(
+          //                         backgroundColor: kPrimaryColor),
+          //                     onPressed: () {
+          //                       GoRouter.of(context).push('/cars');
+          //                     },
+          //                     child:
+          //                         const Icon(Icons.add, color: Colors.white)),
+          //               ),
+          //             ),
+          //             Padding(
+          //               padding: const EdgeInsets.all(5),
+          //               child: Align(
+          //                   alignment: Alignment.centerLeft,
+          //                   child: ElevatedButton(
+          //                       style: ElevatedButton.styleFrom(
+          //                           backgroundColor: kPrimaryColor),
+          //                       onPressed: () {
+          //                         BlocProvider.of<VehiclesCubit>(context)
+          //                             .getVehicle();
+          //                         BlocProvider.of<VehiclesCubit>(context)
+          //                             .getVehiclerealtime();
+          //                       },
+          //                       child:
+          //                           Icon(Icons.refresh, color: Colors.white))),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.only(
+          //             left: 15, right: 15, bottom: 20, top: 5),
+          //         child: CustomContainer(
+          //           width: 500,
+          //           height: 380,
+          //           child: tableV(),
+          //         ),
+          //       ),
+          //     ],
+          //   ));
           } else if (userdata['role'] == 'Driver') {
             return Container();
           }

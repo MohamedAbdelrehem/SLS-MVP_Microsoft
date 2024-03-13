@@ -1,9 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:file/src/interface/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
@@ -59,6 +63,43 @@ class MonitorViewBody extends StatelessWidget {
 //   }
 // }
 
+// Future<File> downloadFile(String url, String customName) async {
+//   final file = await DefaultCacheManager().getSingleFile(url, key: customName);
+//   return file;
+// }
+
+// Future<Stream<FileResponse>?> getCachedFile(String customName) async {
+//   try {
+//     final file =  DefaultCacheManager().getFileStream(customName);
+//     return file;
+//   }  catch (e) {
+//     print('this is the error of caching $e');
+//     // if (CacheExceptionType.fileNotFound == e.type) {
+//     //   // Handle the case where the file is not cached
+//     //   return null;
+//     // } else {
+//     //   // Re-throw other exceptions
+//     //   rethrow;
+//     // }
+//       return null;
+
+//   }
+// }
+Future<String> downloadFile(String url, String customName) async {
+  String filePath = '';
+
+    File file = await DefaultCacheManager().getSingleFile(url);
+
+    filePath = file.path;
+
+        print('this is file path incase of not cached $filePath');
+
+  
+
+  return filePath;
+}
+
+
                   if (car['sleep'] != null ) {
   scolor= car['sleep'] ? Colors.red : Colors.green;
 } else {
@@ -79,22 +120,48 @@ return Column(
                     //   Icons.power_settings_new,
                     //   color: Color(col),
                     // ),
-                    
+
                     const SizedBox(
                       height: 20,
                     ),
-                     CustomContainer(
-                      width: 500,
-                      height: 380,
-                      child: ModelViewer(
-                            backgroundColor: Colors.white,
-                            src: vehicle['vehicle_3d_model_url'],
-                            alt: '3d car model',
-                            ar: true,
-                            autoRotate: true,
-                            disableZoom: true,
-                          ),
-                    ),
+                    
+                    CustomContainer(
+  width: 500,
+  height: 380,
+  child: FutureBuilder<String>(
+    future: downloadFile(vehicle['vehicle_3d_model_url'], vehicle['id']), // Pass the URL and custom name
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      } else {
+        final String? filePath = snapshot.data;
+        print('this is the file path at the widget $filePath');
+        return ModelViewer(
+          backgroundColor: Colors.white,
+          src: filePath!, // Use the file path here
+          alt: '3d car model',
+          ar: true,
+          autoRotate: true,
+          disableZoom: true,
+        );
+      }
+    },
+  ),
+),
+                    //  CustomContainer(
+                    //   width: 500,
+                    //   height: 380,
+                    //   child: ModelViewer(
+                    //         backgroundColor: Colors.white,
+                    //         src: vehicle['vehicle_3d_model_url'],
+                    //         alt: '3d car model',
+                    //         ar: true,
+                    //         autoRotate: true,
+                    //         disableZoom: true,
+                    //       ),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -119,13 +186,10 @@ return Column(
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      child: CustomContainer(
-                        width: 500,
-                        height: 380,
-                        child: MapLeafletView(),
-                      ),
+                    CustomContainer(
+                      width: 500,
+                      height: 380,
+                      child: MapLeafletView(),
                     ),
                     const SizedBox(
                       height: 20,
@@ -307,7 +371,7 @@ return Column(
                 );
                 }
                 else{return const Text('very big error');}
-                return const Text('');
+                // return const Text('');
               },
             ),
           ),
