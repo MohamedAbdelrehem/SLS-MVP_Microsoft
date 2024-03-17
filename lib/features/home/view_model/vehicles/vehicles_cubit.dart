@@ -45,12 +45,7 @@ emit(VehiclesAddFailure());
 
   Future<void> getVehicle () async{
 
-                // final database =   FirebaseDatabase.instance.ref('/car');
-
-// final ds = await database.once(DatabaseEventType.value);
-//           String s = json.encode(ds.snapshot.value);
-
-
+   
 print('entered gettijg');
 
     emit(VehichlesGetLoading());
@@ -64,13 +59,9 @@ final QuerySnapshot querySnapshot= await FirebaseFirestore.instance
       print('this car parsed before even starting $carParsed');
       carParsed.clear();
         for (var doc in querySnapshot.docs) {
-          // final childbase = database.child('${doc.id}');
-          // final event = await childbase.once(DatabaseEventType.value);
 
           print('elements');
-          // print(doc.data());
           String test = json.encode(doc.data());
-          // print(test);
           Map<String,dynamic> decoded = json.decode(test);
           print(doc.id);
           decoded['id']=doc.id;
@@ -79,34 +70,16 @@ final QuerySnapshot querySnapshot= await FirebaseFirestore.instance
           print(decoded);
          carParsed.add(decoded);
          print('this is car parsed car pasrsed car parsed$carParsed');
-        //  print(carParsedrealtime);
 print('element added');
         }
         print('outside loop after car parsed ended $carParsed');
-        //   final event = await database.once(DatabaseEventType.value);
-        //   for(var childsnapshot in event.snapshot.children){
-        //               print('realtime entered');
-
-        //   String test2 = json.encode(childsnapshot.value);
-        //             print("this is the test ${test2}");
-        //   Map<String,dynamic> decoded2 = json.decode(test2);
-        //  carParsedrealtime.add(decoded2);
 
  
-        //   }
-  //       final ds = await database.once(DatabaseEventType.value);
-  //       print(ds.toString());
-  // carParsedrealtime= json.decode(json.encode(ds.snapshot.value)).toList();
-// print(carParsedrealtime);
+
 print('outisdfffffffffffffffffffffffffff');
-//                 carRaw  =  json.encode(vehicles[0]);
-//                 print(carRaw);
-//                         print('car raw');
-// carParsed = json.decode(carRaw);
+
         print('car parsedddddddddddddddddddddddddddddddddddddddddddddddddddd');
-//         // print(carRaw);
-//             print(carParsed);
-// print(carParsed);
+
 emit(VehiclesGetSuccess());
 }catch (e) { 
 emit(VehiclesGetFailure());
@@ -126,37 +99,36 @@ Future<void> getVehiclerealtime () async{
 
 
   try{
-
-      database.onValue.listen((event) {
-        print('realtime data');
-        carParsedrealtime.clear();
-        print('cleared');
-for (var childsnapshot in event.snapshot.children) {
-  print('looping realitme');
-  String tettes =  json.encode(childsnapshot.value);
-  Map<String,dynamic> decodedrealtime = json.decode(tettes);
-  print(decodedrealtime);
-  carParsedrealtime.add(decodedrealtime);
-  print(carParsedrealtime);
-
-}
-
-  print('this is the list ${carParsedrealtime}');
-
-// print('entered2');
-//               print(event.snapshot.value);
-//                   carParsedrealtime = json.decode(json.encode(event.snapshot.value)).toList();
-
-        //  String stest  =  json.encode(event.snapshot.value);
-        // carParsed = json.decode(stest);
-// final childKey = event.snapshot.key;
-// print(childKey);
-
-//         carParsed ={childKey!:event.snapshot.value}; 
-        print(carParsedrealtime);    
+print('enter realtime data before looping');
+      database.onChildChanged.listen((event) {
         
-         print('leaved3');
-               print('emiting new state agaon00');
+        print('refactoring test');
+        print(event.snapshot.key);
+//         print('realtime data');
+//         carParsedrealtime.clear();
+//         print('cleared');
+
+//         print(event.snapshot.value.toString());
+//         print('refactoring twice');
+// print(json.encode(event.snapshot.value));
+// print(json.decode(json.encode(event.snapshot.value)).toString());
+// for (var childsnapshot in event.snapshot.children) {
+//   print('looping realitme');
+//   String tettes =  json.encode(childsnapshot.value);
+//   Map<String,dynamic> decodedrealtime = json.decode(tettes);
+//   print(decodedrealtime);
+//   carParsedrealtime.add(decodedrealtime);
+//   print(carParsedrealtime);
+
+// }
+
+//   print('this is the list the refactoring${carParsedrealtime}');
+
+
+//         print(carParsedrealtime);    
+        
+//          print('leaved3');
+//                print('emiting new state agaon00');
   emit(VehiclesGetSuccess());
 
 

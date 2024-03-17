@@ -125,43 +125,43 @@ return Column(
                       height: 20,
                     ),
                     
-                    CustomContainer(
-  width: 500,
-  height: 380,
-  child: FutureBuilder<String>(
-    future: downloadFile(vehicle['vehicle_3d_model_url'], vehicle['id']), // Pass the URL and custom name
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      } else {
-        final String? filePath = snapshot.data;
-        print('this is the file path at the widget $filePath');
-        return ModelViewer(
-          backgroundColor: Colors.white,
-          src: filePath!, // Use the file path here
-          alt: '3d car model',
-          ar: true,
-          autoRotate: true,
-          disableZoom: true,
-        );
-      }
-    },
-  ),
-),
-                    //  CustomContainer(
-                    //   width: 500,
-                    //   height: 380,
-                    //   child: ModelViewer(
-                    //         backgroundColor: Colors.white,
-                    //         src: vehicle['vehicle_3d_model_url'],
-                    //         alt: '3d car model',
-                    //         ar: true,
-                    //         autoRotate: true,
-                    //         disableZoom: true,
-                    //       ),
-                    // ),
+//                     CustomContainer(
+//   width: 500,
+//   height: 380,
+//   child: FutureBuilder<String>(
+//     future: downloadFile(vehicle['vehicle_3d_model_url'], vehicle['id']), // Pass the URL and custom name
+//     builder: (context, snapshot) {
+//       if (snapshot.connectionState == ConnectionState.waiting) {
+//         return Center(child: CircularProgressIndicator());
+//       } else if (snapshot.hasError) {
+//         return Center(child: Text('Error: ${snapshot.error}'));
+//       } else {
+//         final String? filePath = snapshot.data;
+//         print('this is the file path at the widget $filePath');
+//         return ModelViewer(
+//           backgroundColor: Colors.white,
+//           src: filePath!, // Use the file path here
+//           alt: '3d car model',
+//           ar: true,
+//           autoRotate: true,
+//           disableZoom: true,
+//         );
+//       }
+//     },
+//   ),
+// ),
+                     CustomContainer(
+                      width: 500,
+                      height: 380,
+                      child: ModelViewer(
+                            backgroundColor: Colors.white,
+                            src: vehicle['vehicle_3d_model_url'],
+                            alt: '3d car model',
+                            ar: true,
+                            autoRotate: true,
+                            disableZoom: true,
+                          ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
