@@ -8,6 +8,7 @@ class SettingsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('buildingg testestetstestestestestest');
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 110, bottom: 20),
       child: Expanded(

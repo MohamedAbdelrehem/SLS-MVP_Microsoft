@@ -22,6 +22,17 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
+  // bool _hasTriggeredOnce = false;
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
+  //       if (!_hasTriggeredOnce) {
+  //           BlocProvider.of<VehiclesCubit>(context).getVehicle();
+  //           BlocProvider.of<VehiclesCubit>(context).getVehiclerealtime();
+  //                 _hasTriggeredOnce = true;
+  //   }
+  // }
   @override
   void initState() {
     // TODO: implement initState
@@ -39,6 +50,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         } else if (state is FetchUsersFailure) {
           return const Text('error fetching user so cant display');
         } else if (state is FetchUsersSuccess) {
+              print('buildiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiingggggggggggggggggggggggg');
+
           Map<String, dynamic> userdata =
               BlocProvider.of<FetchUsersCubit>(context).userdata;
           if (userdata['role'] == 'Manager' || userdata['role']== 'Operator') {

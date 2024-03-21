@@ -22,17 +22,15 @@ class FetchUsersCubit extends Cubit<FetchUsersState> {
   if(currentuser !=null){
     print('its not null');
   final userid = currentuser.uid;
-  print('this is the current user id testing $userid');
   final DocumentSnapshot documentSnapshot= await FirebaseFirestore.instance
     .collection('users').doc(userid)
     .get();
-      print('testestttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttting another test');
+      // print('enterere for loop');
       // print('this car parsed before even starting $carParsed');
       // // carParsed.clear();
   print('this is user id $userid');
   print(documentSnapshot);
     print(documentSnapshot.data());
-
 
   // print(  users.doc(userid));
   // final docsnapshot =  await users.doc(userid).get();
