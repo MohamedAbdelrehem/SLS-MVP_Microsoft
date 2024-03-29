@@ -18,9 +18,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-         await FirebaseFirestore.instance.clearPersistence();
+  await FirebaseFirestore.instance.clearPersistence();
 
-  FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: false);
+  FirebaseFirestore.instance.settings =
+      const Settings(persistenceEnabled: false);
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
