@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:sls_mvp_microsoft/features/AR/ar_view.dart';
 import 'package:sls_mvp_microsoft/features/authentication/presentation/view/login_view.dart';
 import 'package:sls_mvp_microsoft/features/authentication/presentation/view/register_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view/add_car.dart';
@@ -32,13 +33,21 @@ abstract class AppRouter {
         path: '/cars',
         builder: (context, state) => const CarView(),
       ),
-            GoRoute(
+      GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterView(),
       ),
       GoRoute(
         path: '/home',
-        builder: (context, state) {print('insideapprouter');return const HomeView();},
+        builder: (context, state) {
+          print('insideapprouter');
+          return const HomeView();
+        },
+      ),
+      //route for AR
+      GoRoute(
+        path: '/ar',
+        builder: (context, state) => ARPage(),
       ),
     ],
   );

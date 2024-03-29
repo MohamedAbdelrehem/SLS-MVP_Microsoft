@@ -96,7 +96,10 @@ class _HomeViewState extends State<HomeView> {
                   showSnackBar(context, "signout failure");
                 } else if (state is SignoutLoading) {}
               },
-              child: IndexedStack(index: _selectedIndex,children: _pages,))),
+              child: IndexedStack(
+                index: _selectedIndex,
+                children: _pages,
+              ))),
     );
   }
 
