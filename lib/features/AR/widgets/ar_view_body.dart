@@ -12,6 +12,7 @@ class ARViewBody extends StatefulWidget {
 class _ARViewBodyState extends State<ARViewBody> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
+  UnityWidgetController? _unityWidgetController;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,8 @@ class _ARViewBodyState extends State<ARViewBody> {
             color: kWhiteColor,
             child: UnityWidget(
               onUnityCreated: onUnityCreated,
+              onUnityMessage: (msg) =>
+                  print("Received message from unity: ${msg.toString()}"),
             ),
           ),
         ),
@@ -36,5 +39,7 @@ class _ARViewBodyState extends State<ARViewBody> {
   }
 
   // Callback that connects the created controller to the unity controller
-  void onUnityCreated(controller) {}
+  void onUnityCreated(controller) {
+    _unityWidgetController = controller;
+  }
 }
