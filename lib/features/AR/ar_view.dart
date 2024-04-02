@@ -60,7 +60,9 @@ class _ARPageState extends State<ARPage> {
                 fontWeight: FontWeight.bold)),
       ),
       body: _hasCameraPermission
-          ? ARViewBody()
+          ? ARViewBody(
+              vehicleId: vehicleId,
+            )
           : Center(
               child: Text(
                 'Camera permission is required for AR features.',
