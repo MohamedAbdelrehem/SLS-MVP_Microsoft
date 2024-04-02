@@ -23,7 +23,7 @@ class DetailsPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             // GoRouter.of(context).go('/home');
-context.pop();
+            context.pop();
           },
         ),
         title: Text('Monitoring $name',
@@ -34,7 +34,7 @@ context.pop();
       ),
       body: MonitorViewBody(
         name: name,
-        ignite: ignite,
+        vehicleID: ignite,
         temp: temp,
       ),
     );

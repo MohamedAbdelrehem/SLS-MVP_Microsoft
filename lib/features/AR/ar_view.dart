@@ -6,11 +6,17 @@ import 'package:sls_mvp_microsoft/features/AR/widgets/ar_view_body.dart';
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/monitoring_view_body.dart';
 
 class ARPage extends StatefulWidget {
+  final String vehicleId;
+
+  ARPage({Key? key, required this.vehicleId}) : super(key: key);
+
   @override
-  _ARPageState createState() => _ARPageState();
+  _ARPageState createState() => _ARPageState(vehicleId);
 }
 
 class _ARPageState extends State<ARPage> {
+  _ARPageState(this.vehicleId);
+  final String vehicleId;
   bool _hasCameraPermission = false;
 
   @override
@@ -47,7 +53,7 @@ class _ARPageState extends State<ARPage> {
             context.pop();
           },
         ),
-        title: Text('AR',
+        title: Text(vehicleId,
             style: TextStyle(
                 fontSize: 20,
                 color: Colors.amber,

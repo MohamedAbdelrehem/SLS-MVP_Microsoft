@@ -19,17 +19,16 @@ import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cub
 
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/fuel_gauge.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-      
 
 class MonitorViewBody extends StatelessWidget {
   final String name;
-  final String ignite;
+  final String vehicleID;
   final String temp;
 
   const MonitorViewBody({
     Key? key,
     required this.name,
-    required this.ignite,
+    required this.vehicleID,
     required this.temp,
   }) : super(key: key);
 
@@ -49,12 +48,12 @@ class MonitorViewBody extends StatelessWidget {
                   Color scolor = Colors.grey;
                   Color mcolor = Colors.grey;
 
-                  Map<String, dynamic> vehicle =
+                  Map<String, dynamic> carFireStore =
                       BlocProvider.of<VehiclesCubit>(context)
-                          .carParsed[int.parse(ignite)];
-                  Map<String, dynamic> car =
+                          .carParsed[int.parse(vehicleID)];
+                  Map<String, dynamic> carFirebaseRealtime =
                       BlocProvider.of<VehiclesCubit>(context)
-                          .carParsedrealtime[int.parse(ignite)];
+                          .carParsedrealtime[int.parse(vehicleID)];
 // Future<String> downloadGLB(String url) async {
 //   final dio = Dio();
 //   final response = await dio.get(url);
@@ -106,14 +105,18 @@ class MonitorViewBody extends StatelessWidget {
                     return filePath;
                   }
 
-                  if (car['sleep'] != null) {
-                    scolor = car['sleep'] ? Colors.red : Colors.green;
+                  if (carFirebaseRealtime['sleep'] != null) {
+                    scolor = carFirebaseRealtime['sleep']
+                        ? Colors.red
+                        : Colors.green;
                   } else {
                     // Set a default color or handle the null case here
                     Color scolor = Colors.grey; // Example default color
                   }
-                  if (car['ignition'] != null) {
-                    mcolor = car['ignition'] ? Colors.green : Colors.red;
+                  if (carFirebaseRealtime['ignition'] != null) {
+                    mcolor = carFirebaseRealtime['ignition']
+                        ? Colors.green
+                        : Colors.red;
                   } else {
                     // Set a default color or handle the null case here
                     Color mcolor = Colors.grey; // Example default color
@@ -166,7 +169,7 @@ class MonitorViewBody extends StatelessWidget {
                         height: 380,
                         child: ModelViewer(
                           backgroundColor: Colors.white,
-                          src: vehicle['vehicle_3d_model_url'],
+                          src: carFireStore['vehicle_3d_model_url'],
                           alt: '3d car model',
                           ar: true,
                           autoRotate: true,
@@ -185,9 +188,9 @@ class MonitorViewBody extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: kPrimaryColor),
                               onPressed: () {
-                                GoRouter.of(context).push('/ar'
-                                //pass vehicle[index]['id'], index.toString(), '10°c');
-                                );
+                                context.pushNamed('ar', pathParameters: {
+                                  'vehicleId': vehicleID,
+                                });
                               },
                               child: const Text('View in AR',
                                   style: TextStyle(color: Colors.white))),
@@ -203,7 +206,7 @@ class MonitorViewBody extends StatelessWidget {
                         height: 380,
                         child: Statistics(
                           title: 'Speed',
-                          varcache: car['speed'],
+                          varcache: carFirebaseRealtime['speed'],
                         ),
                       ),
 
@@ -217,7 +220,7 @@ class MonitorViewBody extends StatelessWidget {
                               width: 400,
                               height: 250,
                               child: SpeedGauge(
-                                speed: car['speed'],
+                                speed: carFirebaseRealtime['speed'],
                               ),
                             ),
                           ),
@@ -229,7 +232,7 @@ class MonitorViewBody extends StatelessWidget {
                               width: 400,
                               height: 250,
                               child: RpmGauge(
-                                rpm: car['rpm'],
+                                rpm: carFirebaseRealtime['rpm'],
                               ),
                             ),
                           ),
@@ -255,7 +258,7 @@ class MonitorViewBody extends StatelessWidget {
                                 size: 100,
                               ),
                               Icon(
-                                car['sleep']
+                                carFirebaseRealtime['sleep']
                                     ? Icons.warning
                                     : Icons.energy_savings_leaf,
                                 color: Colors.black,
@@ -271,13 +274,13 @@ class MonitorViewBody extends StatelessWidget {
                           height: 380,
                           child: FuelGauge(
                             title: 'fuel gauge',
-                            fuel: car['fuel'],
+                            fuel: carFirebaseRealtime['fuel'],
                           )),
                       const SizedBox(
                         height: 20,
                       ),
                       ThermoView(
-                        val: car['temp'],
+                        val: carFirebaseRealtime['temp'],
                       ),
                       const SizedBox(
                         height: 20,
@@ -343,7 +346,8 @@ class MonitorViewBody extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Text(
-                                            car['steering'].toString(),
+                                            carFirebaseRealtime['steering']
+                                                .toString(),
                                             style: TextStyle(
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.bold,
@@ -378,7 +382,9 @@ class MonitorViewBody extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Text(
-                                              car['manualbrake'] ? 'on' : 'off',
+                                              carFirebaseRealtime['manualbrake']
+                                                  ? 'on'
+                                                  : 'off',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -402,7 +408,7 @@ class MonitorViewBody extends StatelessWidget {
                                             width: 20,
                                             height: 20,
                                             child: Text(
-                                              car['fatis'],
+                                              carFirebaseRealtime['fatis'],
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white),

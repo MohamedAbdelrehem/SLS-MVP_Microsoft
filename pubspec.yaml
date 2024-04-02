@@ -54,6 +54,8 @@ dependencies:
   #unity lib and permision for camera
   flutter_unity_widget: ^2022.2.0
   permission_handler: ^11.3.1
+  #Statistics
+  syncfusion_flutter_charts: ^24.2.9
 
 dev_dependencies:
   flutter_launcher_icons: null

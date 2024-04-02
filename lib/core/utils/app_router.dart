@@ -46,8 +46,11 @@ abstract class AppRouter {
       ),
       //route for AR
       GoRoute(
-        path: '/ar',
-        builder: (context, state) => ARPage(),
+        path: '/ar/:vehicleId',
+        name: 'ar',
+        builder: (context, state) => ARPage(
+          vehicleId: state.pathParameters['vehicleId']!,
+        ),
       ),
     ],
   );
