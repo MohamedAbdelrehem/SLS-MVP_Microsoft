@@ -7,6 +7,7 @@ import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cub
 class ARViewBody extends StatefulWidget {
   const ARViewBody({Key? key, required this.vehicleId}) : super(key: key);
   final String vehicleId;
+
   @override
   State<ARViewBody> createState() => _ARViewBodyState();
 }
@@ -21,6 +22,7 @@ class _ARViewBodyState extends State<ARViewBody> {
     Map<String, dynamic> carFirebaseRealtime =
         BlocProvider.of<VehiclesCubit>(context)
             .carParsedrealtime[int.parse(widget.vehicleId)];
+
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
@@ -30,13 +32,32 @@ class _ARViewBodyState extends State<ARViewBody> {
             // Pop the category page if Android back button is pressed.
             return true;
           },
-          child: Container(
-            color: kWhiteColor,
-            child: UnityWidget(
-              onUnityCreated: onUnityCreated,
-              onUnityMessage: (msg) =>
-                  print("Received message from unity: ${msg.toString()}"),
-            ),
+          child: Stack(
+            children: [
+              Container(
+                color: kWhiteColor,
+                child: UnityWidget(
+                  onUnityCreated: onUnityCreated,
+                  onUnityMessage: (msg) =>
+                      print("Received message from unity: ${msg.toString()}"),
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                right: 16,
+                child: Container(
+                  width: 100,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print(
+                          "speed is" + carFirebaseRealtime['speed'].toString());
+                    },
+                    child: Text('Button'),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
