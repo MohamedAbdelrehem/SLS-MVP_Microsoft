@@ -12,12 +12,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
+import 'package:sls_mvp_microsoft/core/widgets/custom_statistics.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Thermometer/thermo_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 
 import 'package:sls_mvp_microsoft/features/monitoring/widgets/fuel_gauge.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+      
 
 class MonitorViewBody extends StatelessWidget {
   final String name;
@@ -128,51 +130,53 @@ class MonitorViewBody extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-
+                      //~3D Model Viewer
+                      // todo: This code for the cache in future update
+                      // CustomContainer(
+                      //   width: 500,
+                      //   height: 380,
+                      //   child: FutureBuilder<String>(
+                      //     future: downloadFile(vehicle['vehicle_3d_model_url'],
+                      //         vehicle['id']), // Pass the URL and custom name
+                      //     builder: (context, snapshot) {
+                      //       if (snapshot.connectionState ==
+                      //           ConnectionState.waiting) {
+                      //         return Center(child: CircularProgressIndicator());
+                      //       } else if (snapshot.hasError) {
+                      //         return Center(
+                      //             child: Text('Error: ${snapshot.error}'));
+                      //       } else {
+                      //         final String? filePath = snapshot.data;
+                      //         print(
+                      //             'this is the file path at the widget $filePath');
+                      //         return ModelViewer(
+                      //           backgroundColor: Colors.white,
+                      //           src: filePath!, // Use the file path here
+                      //           alt: '3d car model',
+                      //           ar: true,
+                      //           autoRotate: true,
+                      //           disableZoom: true,
+                      //         );
+                      //       }
+                      //     },
+                      //   ),
+                      // ),
                       CustomContainer(
                         width: 500,
                         height: 380,
-                        child: FutureBuilder<String>(
-                          future: downloadFile(vehicle['vehicle_3d_model_url'],
-                              vehicle['id']), // Pass the URL and custom name
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(child: CircularProgressIndicator());
-                            } else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text('Error: ${snapshot.error}'));
-                            } else {
-                              final String? filePath = snapshot.data;
-                              print(
-                                  'this is the file path at the widget $filePath');
-                              return ModelViewer(
-                                backgroundColor: Colors.white,
-                                src: filePath!, // Use the file path here
-                                alt: '3d car model',
-                                ar: true,
-                                autoRotate: true,
-                                disableZoom: true,
-                              );
-                            }
-                          },
+                        child: ModelViewer(
+                          backgroundColor: Colors.white,
+                          src: vehicle['vehicle_3d_model_url'],
+                          alt: '3d car model',
+                          ar: true,
+                          autoRotate: true,
+                          disableZoom: true,
                         ),
                       ),
-                      //  CustomContainer(
-                      //   width: 500,
-                      //   height: 380,
-                      //   child: ModelViewer(
-                      //         backgroundColor: Colors.white,
-                      //         src: vehicle['vehicle_3d_model_url'],
-                      //         alt: '3d car model',
-                      //         ar: true,
-                      //         autoRotate: true,
-                      //         disableZoom: true,
-                      //       ),
-                      // ),
                       const SizedBox(
                         height: 20,
                       ),
+                      //~Unity View
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child: Align(
@@ -181,7 +185,9 @@ class MonitorViewBody extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: kPrimaryColor),
                               onPressed: () {
-                                GoRouter.of(context).push('/ar');
+                                GoRouter.of(context).push('/ar'
+                                //pass vehicle[index]['id'], index.toString(), '10°c');
+                                );
                               },
                               child: const Text('View in AR',
                                   style: TextStyle(color: Colors.white))),
@@ -190,11 +196,25 @@ class MonitorViewBody extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
+                      //~Show data
+                      //~Statistics
+                      CustomContainer(
+                        width: 500,
+                        height: 380,
+                        child: Statistics(
+                          title: 'Speed',
+                          varcache: car['speed'],
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         children: [
                           Expanded(
                             child: CustomContainer(
-                              width: 350,
+                              width: 400,
                               height: 250,
                               child: SpeedGauge(
                                 speed: car['speed'],
@@ -206,7 +226,7 @@ class MonitorViewBody extends StatelessWidget {
                           ),
                           Expanded(
                             child: CustomContainer(
-                              width: 350,
+                              width: 400,
                               height: 250,
                               child: RpmGauge(
                                 rpm: car['rpm'],
