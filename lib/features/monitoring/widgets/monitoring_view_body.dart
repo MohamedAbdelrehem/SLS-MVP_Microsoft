@@ -35,6 +35,8 @@ class MonitorViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // int col = int.parse(ignite);
+    Future<String?>? cachedFileFuture;
+    final cache = DefaultCacheManager();
     return SafeArea(
       child: Center(
         child: SingleChildScrollView(
@@ -54,6 +56,52 @@ class MonitorViewBody extends StatelessWidget {
                   Map<String, dynamic> carFirebaseRealtime =
                       BlocProvider.of<VehiclesCubit>(context)
                           .carParsedrealtime[int.parse(vehicleID)];
+
+                  Future<String> addFileProtocol(String path) async {
+                    try {
+                      if (path.isEmpty || path == null) {
+                        throw ArgumentError(
+                            'Invalid path provided: path cannot be empty or null.');
+                      }
+
+                      if (!path.startsWith('file://')) {
+                        final updatedPath = 'file://' + path;
+                        print('File protocol added: $updatedPath');
+
+                        return updatedPath;
+                      } else {
+                        print('File protocol already present: $path');
+                      }
+                    } catch (error) {
+                      print('Error adding file protocol: $error');
+                    }
+                    return 'didnt return from if conditions';
+                  }
+
+                  Future<String> cachingFilePath() async {
+                    print('iam in ');
+                    // final String downloadUrl = 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
+                    final String downloadUrl =
+                        carFireStore['vehicle_3d_model_url'];
+
+                    final String key = Uri.parse(downloadUrl).pathSegments.last;
+
+                    final cachedFile =
+                        await cache.getSingleFile(downloadUrl, key: key);
+                    if (cachedFile != null && cachedFile.existsSync()) {
+                      print('iam in twice');
+                      print('File already cached: ${cachedFile.path}');
+                    }
+                    // await changeFileExtension(cachedFile, 'glb');
+                    final String updatedpath =
+                        await addFileProtocol(cachedFile.path);
+
+                    print('File path there : ${cachedFile.path}');
+                    print('File path there : ${updatedpath}');
+
+                    return updatedpath;
+                    // return cachedFile.path;
+                  }
 // Future<String> downloadGLB(String url) async {
 //   final dio = Dio();
 //   final response = await dio.get(url);
@@ -164,16 +212,48 @@ class MonitorViewBody extends StatelessWidget {
                       //     },
                       //   ),
                       // ),
+                      // CustomContainer(
+                      //   width: 500,
+                      //   height: 380,
+                      //   child: ModelViewer(
+                      //     backgroundColor: Colors.white,
+                      //     src: carFireStore['vehicle_3d_model_url'],
+                      //     alt: '3d car model',
+                      //     ar: true,
+                      //     autoRotate: true,
+                      //     disableZoom: true,
+                      //   ),
+                      // ),
+
                       CustomContainer(
                         width: 500,
                         height: 380,
-                        child: ModelViewer(
-                          backgroundColor: Colors.white,
-                          src: carFireStore['vehicle_3d_model_url'],
-                          alt: '3d car model',
-                          ar: true,
-                          autoRotate: true,
-                          disableZoom: true,
+                        child: FutureBuilder<String?>(
+                          future: cachingFilePath(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final file = snapshot.data!;
+                              String model = snapshot.data!;
+                              // return Image.file(file);
+                              return SizedBox(
+                                width: 200,
+                                height: 100,
+                                child: ModelViewer(
+                                  backgroundColor: Colors.white,
+                                  src: model,
+                                  alt: '3d car model',
+                                  ar: true,
+                                  autoRotate: true,
+                                  disableZoom: true,
+                                ),
+                              );
+                              // return Text('sdfds');
+                            } else if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              return const CustomLoadingIndicator();
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(
