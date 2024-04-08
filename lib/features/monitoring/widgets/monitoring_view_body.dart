@@ -14,6 +14,7 @@ import 'package:sls_mvp_microsoft/core/widgets/custom_container.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_statistics.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapleaftlet_vehicle_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Thermometer/thermo_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 
@@ -321,7 +322,8 @@ class MonitorViewBody extends StatelessWidget {
                       CustomContainer(
                         width: 500,
                         height: 380,
-                        child: MapLeafletView(),
+                        child:
+                            MapLeafletViewVehicle(index: int.parse(vehicleID)),
                       ),
                       const SizedBox(
                         height: 20,
