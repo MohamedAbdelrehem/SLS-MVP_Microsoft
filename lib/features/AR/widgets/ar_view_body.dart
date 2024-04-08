@@ -19,14 +19,19 @@ class _ARViewBodyState extends State<ARViewBody> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
   UnityWidgetController? _unityViewController;
+  Timer? _sendDataTimer;
 
   @override
   void initState() {
     super.initState();
+    _sendDataTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      sendAllData2(); // Call sendAllData2 every second
+    });
   }
 
   @override
   void dispose() {
+    _sendDataTimer?.cancel(); // Cancel the timer when the widget is disposed
     super.dispose();
     _unityViewController?.dispose();
   }
@@ -69,7 +74,7 @@ class _ARViewBodyState extends State<ARViewBody> {
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {
-                            sendAllData2(carFirebaseRealtime);
+                            sendAllData2();
                           },
                           child: Text('Button'),
                         ),
@@ -87,7 +92,9 @@ class _ARViewBodyState extends State<ARViewBody> {
     );
   }
 
-  void sendAllData2(Map<String, dynamic> carFirebaseRealtime) {
+  void sendAllData2() {
+    final carFirebaseRealtime = BlocProvider.of<VehiclesCubit>(context)
+        .carParsedrealtime[int.parse(widget.vehicleId)];
     _unityViewController?.postMessage(
       'HMI',
       'SetSpeed2',
