@@ -7,6 +7,7 @@ import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_snack_bar.dart';
 
 import 'package:sls_mvp_microsoft/features/home/view/widgets/Map/mapLeaflet_view.dart';
+import 'package:sls_mvp_microsoft/features/home/view/widgets/car_status.dart';
 import 'package:sls_mvp_microsoft/features/home/view/widgets/neumorphic_expenses/totalVehicles_view.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/fetch_users_cubit/fetch_users_cubit.dart';
 // import 'package:sls_mvp_microsoft/features/home/view_model/car_realtime_cubit/car_realtime_cubit.dart';
@@ -262,7 +263,17 @@ class tableV extends StatelessWidget {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
+                columnSpacing: 20,
+
                 columns: const <DataColumn>[
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        "Status",
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
                   DataColumn(
                     label: Expanded(
                       child: Text(
@@ -424,6 +435,13 @@ class tableV extends StatelessWidget {
                   return DataRow(
                     cells: <DataCell>[
                       DataCell(
+                        Align(
+                            alignment: Alignment.center,
+                            child:
+                                CarStatus(timestamp: car[index]['timestamp'])),
+                      ), //add car status icon here
+
+                      DataCell(
                         Row(
                           children: [
                             Icon(Icons.local_shipping),
@@ -439,15 +457,25 @@ class tableV extends StatelessWidget {
                               vehicle[index]['id'], index.toString(), '10°c');
                         },
                       ),
-                      DataCell(Icon(
-                        Icons.power_settings_new,
-                        color: mcolor,
+                      DataCell(Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.power_settings_new,
+                          color: mcolor,
+                        ),
                       )),
-                      DataCell(Text('${car[index]['temp']}°C')),
-                      DataCell(Icon(Icons.door_front_door, color: dcolor)),
-                      const DataCell(Text('191 KMs')),
-                      const DataCell(
-                          Text('104', style: TextStyle(color: Colors.red))),
+                      DataCell(Align(
+                          alignment: Alignment.center,
+                          child: Text('${car[index]['temp']}°C'))),
+                      DataCell(Align(
+                          alignment: Alignment.center,
+                          child: Icon(Icons.door_front_door, color: dcolor))),
+                      const DataCell(Align(
+                          alignment: Alignment.center, child: Text('191 KMs'))),
+                      const DataCell(Align(
+                          alignment: Alignment.center,
+                          child: Text('104',
+                              style: TextStyle(color: Colors.red)))),
                       const DataCell(Text('28,AI turath street',
                           style: TextStyle(color: Colors.blue))),
                       DataCell(Text('${car[index]['speed']} Kmph')),
