@@ -99,8 +99,8 @@ class _MapLeafletViewState extends State<MapLeafletView> {
                           ),
                         ),
                         ...car.map((carData) {
-                          if (carData['latitude'] == 'INVALID' ||
-                              carData['longitude'] == 'INVALID') {
+                          if (carData['location']['longitude'] == 'INVALID' ||
+                              carData['location']['longitude'] == 'null') {
                             return Marker(
                               width: 0.0,
                               height: 0.0,
@@ -108,21 +108,13 @@ class _MapLeafletViewState extends State<MapLeafletView> {
                               child: Container(),
                             );
                           } else {
-                            print(
-                                'this if for map debug new one ${carData['latitude']}');
-                            final num testing =
-                                num.parse(carData['latitude'].toString());
-                            print('this is testing map print $testing');
+                            final num testing = num.parse(
+                                carData['location']['latitude'].toString());
                             final double lat = testing.toDouble();
-                            print('this is testing last map print $lat');
 
-                            print(
-                                'this if for map debug new one ${carData['longitude'].toString()}');
-                            final num testing2 =
-                                num.parse(carData['longitude'].toString());
-                            print('this is testing map print $testing2');
+                            final num testing2 = num.parse(
+                                carData['location']['longitude'].toString());
                             final double long = testing2.toDouble();
-                            print('this is testing last map print $long');
                             return Marker(
                               width: 80.0,
                               height: 80.0,

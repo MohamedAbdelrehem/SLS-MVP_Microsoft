@@ -8,7 +8,7 @@ import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cub
 
 class MapLeafletViewVehicle extends StatefulWidget {
   const MapLeafletViewVehicle({super.key, required this.index});
-final int index;
+  final int index;
   @override
   _MapLeafletViewVehicleState createState() => _MapLeafletViewVehicleState();
 }
@@ -52,69 +52,74 @@ class _MapLeafletViewVehicleState extends State<MapLeafletViewVehicle> {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<VehiclesCubit, VehiclesState>(
+    return BlocBuilder<VehiclesCubit, VehiclesState>(
       builder: (context, state) {
-        if(state is VehichlesGetLoading){
+        if (state is VehichlesGetLoading) {
           return CustomLoadingIndicator();
-        }else if(state is VehiclesGetFailure){
+        } else if (state is VehiclesGetFailure) {
           return Text('failure getting vehicle data ');
-        }else if(state is VehiclesGetSuccess){
-                    Map<String, dynamic> car =
-              BlocProvider.of<VehiclesCubit>(context).carParsedrealtime[widget.index];
+        } else if (state is VehiclesGetSuccess) {
+          Map<String, dynamic> car = BlocProvider.of<VehiclesCubit>(context)
+              .carParsedrealtime[widget.index];
 
-  if(car['latitude'] == 'INVALID' || car['longitude']=='INVALID' ){
-return Column(
-  children: [
-    Expanded(child: Icon(Icons.dangerous,color: Colors.red,size: 50,)),
-    Expanded(child: Text('INVALID location',style: TextStyle(color: Colors.red,fontSize: 20),)),
-  ],
-);
-
-  }else{
-    final num loclat = num.parse(car['latitude']);
-    final double lat = loclat.toDouble();
-        final num loclong = num.parse(car['longitude']);
-    final double long = loclong.toDouble();
-    
-     return FlutterMap(
-      options: MapOptions(
-  initialCenter:LatLng(lat, long)
-            ,
-        initialZoom: 9.2,
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
-        ),
-        MarkerLayer(
-          markers: [
-            Marker(
-              width: 80.0,
-              height: 80.0,
-              point:   LatLng(lat,long),
-              child: Container(
-                child: const Icon(
-                  Icons.location_on,
-                  size: 45.0,
+          if (car['location']['latitude'] == 'INVALID' ||
+              car['location']['latitude'] == 'null') {
+            return Column(
+              children: [
+                Expanded(
+                    child: Icon(
+                  Icons.dangerous,
                   color: Colors.red,
-                ),
+                  size: 50,
+                )),
+                Expanded(
+                    child: Text(
+                  'INVALID location',
+                  style: TextStyle(color: Colors.red, fontSize: 20),
+                )),
+              ],
+            );
+          } else {
+            final num loclat = num.parse(car['location']['latitude']);
+            final double lat = loclat.toDouble();
+            final num loclong = num.parse(car['location']['longitude']);
+            final double long = loclong.toDouble();
+
+            return FlutterMap(
+              options: MapOptions(
+                initialCenter: LatLng(lat, long),
+                initialZoom: 9.2,
               ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-    
-  
-}else if(state is VehiclesInitial){
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.app',
+                ),
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      width: 80.0,
+                      height: 80.0,
+                      point: LatLng(lat, long),
+                      child: Container(
+                        child: const Icon(
+                          Icons.location_on,
+                          size: 45.0,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }
+        } else if (state is VehiclesInitial) {
           return Text('this is the intial state');
-        }else{
+        } else {
           return Text('state management problem');
         }
-        
-        }, 
+      },
     );
   }
 }
