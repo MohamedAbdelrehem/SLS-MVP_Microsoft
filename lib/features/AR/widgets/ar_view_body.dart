@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,7 @@ class _ARViewBodyState extends State<ARViewBody> {
   void initState() {
     super.initState();
     _sendDataTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      sendAllData2(); // Call sendAllData2 every second
+      sendAllData(); // Call sendAllData2 every second
     });
   }
 
@@ -74,7 +75,7 @@ class _ARViewBodyState extends State<ARViewBody> {
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {
-                            sendAllData2();
+                            test();
                           },
                           child: Text('Button'),
                         ),
@@ -92,13 +93,33 @@ class _ARViewBodyState extends State<ARViewBody> {
     );
   }
 
-  void sendAllData2() {
+  void sendAllData() {
     final carFirebaseRealtime = BlocProvider.of<VehiclesCubit>(context)
         .carParsedrealtime[int.parse(widget.vehicleId)];
+
+    // Convert the map to a JSON string before sending
+    String jsonData = jsonEncode(carFirebaseRealtime);
+
     _unityViewController?.postMessage(
       'HMI',
-      'SetSpeed2',
-      carFirebaseRealtime['speed'].toString(),
+      'UpdateCarDataFromFlutter',
+      jsonData, // Send the JSON string instead of toString()
+    );
+  }
+
+  void test() {
+    _unityViewController?.postMessage(
+      'Interaction',
+      'Switch',
+      '',
+    );
+  }
+
+  void button1() {
+    _unityViewController?.postMessage(
+      'Interaction',
+      'Switch',
+      '',
     );
   }
 }
