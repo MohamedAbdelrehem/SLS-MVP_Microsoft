@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 
@@ -90,12 +91,10 @@ class _MapLeafletViewState extends State<MapLeafletView> {
                           height: 80.0,
                           point: LatLng(_currentLocation?.latitude ?? 0,
                               _currentLocation?.longitude ?? 0),
-                          child: Container(
-                            child: const Icon(
-                              Icons.location_on,
-                              size: 45.0,
-                              color: Colors.blue,
-                            ),
+                          child: const Icon(
+                            Icons.man_outlined,
+                            size: 30.0,
+                            color: Colors.blue,
                           ),
                         ),
                         ...car.map((carData) {
@@ -122,13 +121,29 @@ class _MapLeafletViewState extends State<MapLeafletView> {
                                 lat, // Extract latitude
                                 long, // Extract longitude
                               ),
-                              child: Container(
-                                child: const Icon(
-                                  Icons.location_on,
-                                  size: 45.0,
-                                  color: Colors.red,
-                                ),
-                              ),
+                              child: Tooltip(
+                                  decoration: BoxDecoration(
+                                    color: kWhiteColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Icon(
+                                    Icons.fire_truck_rounded,
+                                    size: 25.0,
+                                    color: kPrimaryColor,
+                                  ),
+                                  textStyle: TextStyle(
+                                      color: kSecondColor, fontSize: 15),
+                                  message:
+                                      'Battery: ${carData['battery']}% \nFuel: ${carData['fuel']}% \nSpeed: ${carData['speed']} km/h'),
                             );
                           }
                         }).toList()
