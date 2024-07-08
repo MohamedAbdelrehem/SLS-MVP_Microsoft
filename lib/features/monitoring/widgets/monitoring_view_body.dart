@@ -331,21 +331,27 @@ class MonitorViewBody extends StatelessWidget {
                       CustomContainer(
                           width: 200,
                           height: 200,
-                          child: Row(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.remove_red_eye,
-                                color: scolor,
-                                size: 100,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.remove_red_eye,
+                                    color: scolor,
+                                    size: 100,
+                                  ),
+                                  Icon(
+                                    carFirebaseRealtime['sleep']
+                                        ? Icons.warning
+                                        : Icons.sentiment_satisfied_rounded,
+                                    color: Colors.black,
+                                    size: 40,
+                                  ),
+                                ],
                               ),
-                              Icon(
-                                carFirebaseRealtime['sleep']
-                                    ? Icons.warning
-                                    : Icons.energy_savings_leaf,
-                                color: Colors.black,
-                                size: 40,
-                              )
+                              Text("Sleeping Status"),
                             ],
                           )),
                       const SizedBox(

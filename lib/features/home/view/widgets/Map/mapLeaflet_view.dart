@@ -136,7 +136,7 @@ class _MapLeafletViewState extends State<MapLeafletView> {
                                     ],
                                   ),
                                   child: Icon(
-                                    Icons.fire_truck_rounded,
+                                    Icons.local_shipping_rounded,
                                     size: 25.0,
                                     color: kPrimaryColor,
                                   ),

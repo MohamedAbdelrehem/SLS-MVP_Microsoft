@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:sls_mvp_microsoft/constants.dart';
 import 'package:sls_mvp_microsoft/core/widgets/custom_loading_indicator.dart';
 import 'package:sls_mvp_microsoft/features/home/view_model/vehicles/vehicles_cubit.dart';
 
@@ -103,9 +104,9 @@ class _MapLeafletViewVehicleState extends State<MapLeafletViewVehicle> {
                       point: LatLng(lat, long),
                       child: Container(
                         child: const Icon(
-                          Icons.location_on,
-                          size: 45.0,
-                          color: Colors.red,
+                          Icons.local_shipping_rounded,
+                          size: 30.0,
+                          color: kPrimaryColor,
                         ),
                       ),
                     ),

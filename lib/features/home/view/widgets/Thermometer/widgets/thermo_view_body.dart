@@ -13,7 +13,7 @@ class ThermoViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final ValueNotifier<double> temperature = ValueNotifier(val.toDouble());
+    final ValueNotifier<double> temperature = ValueNotifier(val.toDouble());
 
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
@@ -46,14 +46,15 @@ class ThermoViewBody extends StatelessWidget {
                         children: [
                           Positioned.fill(
                               child: Thermo(temperature: temperature.value)),
-                          Positioned.fill(
-                            left: 300,
-                            child: ThermoSlider(
-                              value: temperature.value,
-                              onValueChanged: (value) =>
-                                  temperature.value = value,
-                            ),
-                          ),
+                          //~Slider
+                          // Positioned.fill(
+                          //   left: 300,
+                          //   child: ThermoSlider(
+                          //     value: temperature.value,
+                          //     onValueChanged: (value) =>
+                          //         temperature.value = value,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

@@ -67,7 +67,6 @@ class _ThermoState extends State<Thermo> with SingleTickerProviderStateMixin {
   }
 }
 
-
 class ThermoPainter extends CustomPainter {
   final double temperature;
 
@@ -189,13 +188,13 @@ class ThermoPainter extends CustomPainter {
   }
 
   void _drawLiquid(
-      ui.Canvas canvas,
-      ui.Size size,
-      ui.Offset bottomRight,
-      ui.Offset topLeft, {
-        ui.Offset offset = Offset.zero,
-        bool blur = false,
-      }) {
+    ui.Canvas canvas,
+    ui.Size size,
+    ui.Offset bottomRight,
+    ui.Offset topLeft, {
+    ui.Offset offset = Offset.zero,
+    bool blur = false,
+  }) {
     const gradientColors = [
       Colors.red,
       Colors.orange,
@@ -208,17 +207,17 @@ class ThermoPainter extends CustomPainter {
 
     // liquid back
     final liquidTopLeft = Offset(
-      (size.width - thermoWidth) / 2 + thickness,
-      (size.height - radius - vPadding) -
-          ((temperature / 50) *
-              (size.height - (2 * vPadding + radius * 2))),
-    ) -
+          (size.width - thermoWidth) / 2 + thickness,
+          (size.height - radius - vPadding) -
+              ((temperature / 50) *
+                  (size.height - (2 * vPadding + radius * 2))),
+        ) -
         offset;
 
     final r = Rect.fromPoints(liquidTopLeft, bottomRight - offset);
     final colorStops = List.generate(
       gradientColors.length,
-          (index) => index / gradientColors.length,
+      (index) => index / gradientColors.length,
     );
 
     final pathLight = Path()

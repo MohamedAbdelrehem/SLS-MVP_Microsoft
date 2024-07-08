@@ -127,7 +127,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   ),
                 ),
                 CustomContainer(
-                  width: 500,
+                  width: MediaQuery.of(context).size.width,
                   height: 380,
                   child: tableV(),
                 ),
@@ -444,7 +444,7 @@ class tableV extends StatelessWidget {
                       DataCell(
                         Row(
                           children: [
-                            Icon(Icons.local_shipping),
+                            Icon(Icons.local_shipping_rounded),
                             SizedBox(
                               width: 10,
                             ),
@@ -474,9 +474,9 @@ class tableV extends StatelessWidget {
                           alignment: Alignment.center, child: Text('191 KMs'))),
                       const DataCell(Align(
                           alignment: Alignment.center,
-                          child: Text('104',
-                              style: TextStyle(color: Colors.red)))),
-                      const DataCell(Text('28,AI turath street',
+                          child:
+                              Text('0', style: TextStyle(color: Colors.red)))),
+                      const DataCell(Text('25 Studio el Ahram',
                           style: TextStyle(color: Colors.blue))),
                       DataCell(Text('${car[index]['speed']} Kmph')),
                       DataCell(Container(
@@ -493,11 +493,11 @@ class tableV extends StatelessWidget {
                           ),
                           child: const Text('0 0 0 2 8 2 7 4',
                               style: TextStyle(color: Colors.black)))),
-                      const DataCell(Text('50 sec ago')),
-                      const DataCell(Text('Merchandiser')),
-                      const DataCell(Text('Najeeb Mohammed')),
-                      const DataCell(Text('08:07 AM')),
-                      const DataCell(Text('04:00 PM')),
+                      const DataCell(Text('1 sec ago')),
+                      const DataCell(Text('SLS')),
+                      const DataCell(Text('Mohamed Ahmed')),
+                      const DataCell(Text('12:00 AM')),
+                      const DataCell(Text('1:31 PM')),
                       DataCell(Text(car[index]['timestamp'])),
                       const DataCell(Icon(Icons.videocam, color: Colors.red)),
                       DataCell(Text('${car[index]['battery']}volts')),
