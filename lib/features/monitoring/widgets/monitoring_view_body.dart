@@ -79,6 +79,21 @@ class MonitorViewBody extends StatelessWidget {
                     return 'didnt return from if conditions';
                   }
 
+                  String _getImagePathBasedOnNumber(int signValue) {
+                    switch (signValue) {
+                      case 0:
+                        return 'assets/images/traffic1.jpg';
+                      case 1:
+                        return 'assets/images/speedlimit.PNG';
+                      case 2:
+                        return 'assets/images/crosswalk.jpg';
+                      case 3:
+                        return 'assets/images/stopsign2.jpg';
+                      default:
+                        return 'assets/images/default1.jfif';
+                    }
+                  }
+
                   Future<String> cachingFilePath() async {
                     print('iam in ');
                     // final String downloadUrl = 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
@@ -329,8 +344,8 @@ class MonitorViewBody extends StatelessWidget {
                         height: 20,
                       ),
                       CustomContainer(
-                          width: 200,
-                          height: 200,
+                          width: 300,
+                          height: 300,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -340,20 +355,47 @@ class MonitorViewBody extends StatelessWidget {
                                   Icon(
                                     Icons.remove_red_eye,
                                     color: scolor,
-                                    size: 100,
+                                    size: 120,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
                                   ),
                                   Icon(
                                     carFirebaseRealtime['sleep']
                                         ? Icons.warning
                                         : Icons.sentiment_satisfied_rounded,
                                     color: Colors.black,
-                                    size: 40,
+                                    size: 60,
                                   ),
                                 ],
                               ),
                               Text("Sleeping Status"),
                             ],
                           )),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomContainer(
+                        width: 300,
+                        height: 300,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                _getImagePathBasedOnNumber(
+                                    carFirebaseRealtime['signs']),
+                                width: 300,
+                                height: 230,
+                              ),
+                            ),
+                            Text("Traffic Signs"),
+                          ],
+                        ),
+                      ),
+
                       const SizedBox(
                         height: 20,
                       ),
